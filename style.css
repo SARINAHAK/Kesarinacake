@@ -1,0 +1,33 @@
+#registration {
+    margin: 2rem;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    width: 300px;
+}
+
+form {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #555;
+}
