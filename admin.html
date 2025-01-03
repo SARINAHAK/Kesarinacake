@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Toko</title>
+    <link rel="stylesheet" href="styleadmin.css">
+</head>
+<body>
+    <section id="admin-dashboard">
+        <h2>Admin Toko</h2>
+        <nav>
+            <ul>
+                <li><a href="#product-management">Kelola Produk</li>
+                <li><a href="#order-management">Kelola Pesanan</li>
+            </ul>
+        </nav>
+
+        <div id="product-management">
+            <h3>Kelola Produk</h3>
+            <form id="add-product-form">
+                <label for="product-name">Nama Produk:</label>
+                <input type="text" id="product-name" name="product-name" required>
+
+                <label for="product-category">Kategori:</label>
+                <input type="text" id="product-category" name="product-category" required>
+                
+                <label for="product-price">Harga:</label>
+                <input type="number" id="product-price" name="product-price" required>
+
+                <button type="submit">Tambah Produk</button>
+            </form>
+
+            <div id="product-list">
+                <h4>Daftar Produk</h4>
+                <!-- Produk akan ditampilkan disini-->
+            </div>
+
+        </div>
+
+        <div id="order-management">
+            <h3>Kelola Pesanan</h3>
+            <div id="order-list">
+                <h4>Daftar Pesanan</h4>
+                <!-- Pesanan akan ditampilkan disini -->
+            </div>
+        </div>
+    </section>
+
+    <script src="scriptadmin.js"></script>
+</body>
+</html>
