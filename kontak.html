@@ -7,22 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Memuat header dan footer secara dinamis -->
-    <div id="header-placeholder"></div>
-
-    <main>
-        <section>
-            <h2>Hubungi Kami</h2>
-            <p>Email: info@kesarinacake.com</p>
-        </section>
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Beranda</a> / <span>Kontak</span>
+        </div>
+        <h2>Kontak</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Nama" required>
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Subjek" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Pesan" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Kirim</button>
+        </form>
     </main>
-
-    <!-- Memuat footer -->
-    <div id="footer-placeholder"></div>
-
-    <script>
-        // Memanggil fungsi loadHeaderFooter yang sama
-        window.onload = loadHeaderFooter;
-    </script>
 </body>
 </html>
