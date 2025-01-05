@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimoni - Kesarina Cake</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Memuat header dan footer secara dinamis -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section>
+            <h2>Testimoni Pelanggan</h2>
+            <form id="reviewForm">
+                <label for="reviewName">Nama:</label>
+                <input type="text" id="reviewName" required>
+                <br>
+                <label for="reviewText">Testimoni:</label>
+                <textarea id="reviewText" required></textarea>
+                <br>
+                <button type="submit">Kirim Testimoni</button>
+            </form>
+            <div id="reviewsContainer"></div>
+        </section>
+    </main>
+
+    <!-- Memuat footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Memanggil fungsi loadHeaderFooter yang sama
+        window.onload = loadHeaderFooter;
+    </script>
+</body>
+</html>

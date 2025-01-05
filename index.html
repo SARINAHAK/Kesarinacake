@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kesarina Cake - Aplikasi Web</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>punya sari</h1>
+    <!-- Memuat header dan footer secara dinamis -->
+    <div id="header-placeholder"></div>
+
+    <!-- Konten Utama -->
+    <main>
+
+        <section id="produk" class="product">
+            <img src="bener.png" alt="kue unggulan" width="230" height="280" class="product-image"/>
+            <p class="product-description">Kami menawarkan berbagai macam kue, mulai dari kue ulang tahun hingga kue perayaan. Berikut adalah beberapa produk kami.</p>
+        </section>
+    </main>
+
+    <!-- Memuat footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Fungsi untuk memuat header dan footer
+        function loadHeaderFooter() {
+            // Memuat header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header-placeholder').innerHTML = data);
+
+            // Memuat footer
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('footer-placeholder').innerHTML = data);
+        }
+
+        // Memanggil fungsi loadHeaderFooter ketika halaman dimuat
+        window.onload = loadHeaderFooter;
+    </script>
 </body>
 </html>
