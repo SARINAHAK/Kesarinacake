@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Pengguna</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Login Pengguna</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="login.js" defer></script>
 </head>
 <body>
-    <section id="registration">
-        <h2>Daftar Pengguna Baru</h2>
-        <form id="registration-form">
-            <label for="fullname">Nama Lengkap:</label>
-            <input type="text" id="fullname" name="fullname" required>
+    <div class="form-container">
+        <h1>Login</h1>
+        <form id="loginform" method="POST" action="login.php">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
+                <small class="error-message" id="emailError"></small>
+            </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password anda" required>
+                <small class="error-message" id="passwordError"></small>
+            </div>
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Daftar</button>
+            <button type="submit">Login</button>
         </form>
-    </section>
 
-    <script src="script.js">Daftar</script>
+        <p> Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+    </div>
 </body>
 </html>

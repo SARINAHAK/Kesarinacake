@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Reset untuk margin, padding, dan box-sizing */
 * {
     margin: 0;
@@ -11,7 +12,6 @@ body {
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
-    font-size: 16px;
 }
 
 /* Styling untuk header */
@@ -26,48 +26,47 @@ header {
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Styling untuk navigasi */
 nav ul {
-    display: flex;
-    justify-content: center;
     list-style: none;
-    background-color: #f0c987;
-    padding: 20px;
-    margin: 20px;
-    border-top: 2px solid #fff;
+    display: flex;
+    gap: 15px;
 }
 
 nav ul li {
-    margin: 0 20px;
+    display: inline;
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
-    font-size: 1.2rem;
     font-weight: bold;
-    transition: color 0.3s, transform 0.3s;
 }
 
 nav ul li a:hover {
-    color: #d4a373;
-    transform: scale(1.05);
+    color: #2f1d0c;
 }
 
-/* Main content */
-main {
-    padding: 40px 20px;
-}
-
-/* Judul kategori dan produk */
-h2 {
-    font-size: 2rem;
-    color: #d4a373;
+.hero {
+    height: 300px;
+    background: url(bener.png) no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
     text-align: center;
-    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: rgb(206, 186, 186);
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .product-title {
@@ -188,15 +187,27 @@ img {
     color: #555;
 }
 
-/* Footer */
-footer {
-    background-color: #d4a373;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 1.1rem;
-    margin-top: 40px;
+
+/* Styling untuk link sosial media */
+.social-links {
+    margin-top: 10px;
 }
+
+.social-icon {
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.social-icon img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover img {
+    transform: scale(1.2); /* Zoom in saat hover */
+}
+
 
 /* Responsif: Menyesuaikan tampilan untuk layar lebih kecil */
 @media (max-width: 768px) {
@@ -244,3 +255,121 @@ footer {
         font-size: 1rem;
     }
 }
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.footer-column h3 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin: 5px 0;
+  }
+  
+  .footer-column ul a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .footer-column ul a:hover {
+    text-decoration: none;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #555;
+    margin-top: 20px;
+  }
+  
+=======
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    background-color: #f5a623;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e59420;
+}
+
+small {
+    color: #999;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+}
+
+p {
+    text-align: center;
+    margin-top: 1rem;
+}
+>>>>>>> 5bb2f2ff276abbdc859d42c63003c0758179df21
