@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Kesarina Cake</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Beranda</a> / <span>Kontak</span>
+        </div>
+        <h2>Kontak</h2>
+        <form id="contact-form">
+            <div class="form-group">
+                <input type="text" id="nama" placeholder="Nama" required>
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <textarea id="pesan" placeholder="Pesan" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Kirim ke WhatsApp</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form untuk reload halaman
+
+            // Mengambil data dari form
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var pesan = document.getElementById("pesan").value;
+
+            // Menyiapkan pesan untuk WhatsApp
+            var message = "Halo, saya ingin bertanya mengenai produk Kesarina Cake.";
+            message += "Nama: " + nama + "";
+            message += "Email: " + email + "";
+            message += "Pesan: " + pesan;
+
+            // Link WhatsApp API
+            var whatsappLink = "https://wa.me/6285298770635?text=" + encodeURIComponent(message);
+
+            // Redirect ke WhatsApp dengan pesan otomatis
+            window.location.href = whatsappLink;
+        });
+    </script>
+</body>
+</html>

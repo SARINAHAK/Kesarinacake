@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimoni - Kesarina Cake</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Memuat header dan footer secara dinamis -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section>
+            <h2>Testimoni Pelanggan</h2>
+            <form id="reviewForm">
+                <label for="reviewName">Nama:</label>
+                <input type="text" id="reviewName" required>
+                <br>
+                <label for="reviewText">Testimoni:</label>
+                <textarea id="reviewText" required></textarea>
+                <br>
+                <button type="submit">Kirim Testimoni</button>
+            </form>
+            <div id="reviewsContainer"></div>
+            <p id="submitMessage" style="color: green; display: none;">Testimoni berhasil terkirim!</p>
+        </section>
+    </main>
+
+    <!-- Memuat footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Fungsi untuk menyimpan testimoni ke localStorage
+        function saveReview(name, text) {
+            let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.push({ name: name, text: text });
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+        }
+
+        // Fungsi untuk menampilkan semua testimoni dari localStorage
+        function displayReviews() {
+            let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            const reviewsContainer = document.getElementById('reviewsContainer');
+            reviewsContainer.innerHTML = ''; // Kosongkan kontainer sebelum menampilkan ulang
+            reviews.forEach(review => {
+                const reviewElement = document.createElement('div');
+                reviewElement.classList.add('review');
+                reviewElement.innerHTML = `<p><strong>${review.name}:</strong></p><p>${review.text}</p>`;
+                reviewsContainer.appendChild(reviewElement);
+            });
+        }
+
+        // Menangani pengiriman form testimoni
+        document.getElementById('reviewForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah halaman me-refresh
+            const name = document.getElementById('reviewName').value;
+            const text = document.getElementById('reviewText').value;
+
+            // Simpan testimoni dan tampilkan
+            saveReview(name, text);
+            displayReviews(); // Menampilkan testimoni yang sudah ada setelah submit
+
+            // Tampilkan pesan sukses
+            const submitMessage = document.getElementById('submitMessage');
+            submitMessage.style.display = 'block';
+
+            // Sembunyikan pesan sukses setelah 3 detik
+            setTimeout(function() {
+                submitMessage.style.display = 'none';
+            }, 3000);
+
+            // Reset form
+            document.getElementById('reviewForm').reset();
+        });
+
+        // Menampilkan testimoni ketika halaman dimuat
+        displayReviews();
+    </script>
+</body>
+</html>
