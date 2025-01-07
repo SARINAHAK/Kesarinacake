@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="keranjang.css">
+
+</head>
+
+<body>
+    <h1>Simple Shopping Cart</h1>
+    <div class="products">
+        <!-- Produk 1 -->
+        <div class="product">
+            <h3>Product 1</h3>
+            <img src="kue Brownies.jpeg" alt="kue brownies yang lezat" width="110" height="118">
+            <p>$10.00</p>
+            <button onclick="addToCart('Product 1', 10)">Add to Cart</button>
+        </div>
+        <!-- Produk 2 -->
+        <div class="product">
+            <h3>Product 2</h3>
+            <p>$15.00</p>
+            <button onclick="addToCart('Product 2', 15)">Add to Cart</button>
+        </div>
+    </div>
+    
+    <h2>Shopping Cart</h2>
+    <div id="cart"></div>
+
+    <script src="keranjang.js"></script>
+</body>
+
+</html>
