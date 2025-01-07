@@ -33,35 +33,21 @@ body {
     color: #007bff;
 }
 
-
 .header-icons {
     display: flex;
-    gap: 20px;
-    justify-content: flex-end; 
-    align-items: center; 
-    margin: 20px; 
+    gap: 15px;
+    justify-content: right;
+    margin: 20px;
 }
-
 
 .icon-link {
-    display: inline-block; 
-    transition: transform 0.3s ease; 
+    display: inline-block;
 }
-
 
 .icon {
-    width: 30px; 
-    height: 30px; 
-    object-fit: cover; 
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 24px;
+    height: 24px;
 }
-
-
-.icon-link:hover .icon {
-    transform: scale(1.1); 
-    opacity: 0.8; 
-}
-
 
 .hero {
     height: 300px;
@@ -105,55 +91,42 @@ h2 {
     margin-bottom: 20px;
 }
 
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    background: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-.form-group {
+#contact-form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group input,
+  .form-group textarea {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"] {
-    width: calc(50% - 10px);
-}
-
-textarea {
-    resize: none;
-}
-
-.submit-btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
+    border-radius: 5px;
+    resize: none; /* Disable resize for textarea */
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+  }
+  
+  .submit-btn {
+    background-color: #25d366; /* Green color */
     color: #fff;
-    background-color: #ad2020;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.submit-btn:hover {
-    background-color: #ad2020;
-}
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #ad2020; 
+  }
 
 .product-title {
     color: #d4a373;
@@ -197,8 +170,6 @@ textarea {
     color: #555;
 }
 
-
-
 #reviewForm {
     margin-top: 30px;
     background-color: #fff;
@@ -241,94 +212,56 @@ textarea {
 }
 
 
-#reviewsContainer {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.review-item {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-}
-
-.review-item h4 {
-    font-size: 1.3rem;
-    color: #d4a373;
-    margin-bottom: 10px;
-}
-
-.review-item p {
-    font-size: 1rem;
-    color: #555;
-}
-
-
-.social-links {
-    margin-top: 10px;
-}
-
-.social-icon {
-    margin: 0 10px;
-    display: inline-block;
-}
-
-.social-icon img {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease;
-}
-
-.social-icon:hover img {
-    transform: scale(1.2); 
-}
-
 footer {
     background-color: #333;
     color: white;
     padding: 20px 0;
 }
 
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-column {
-    width: 30%;
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
 }
 
 .footer-column h3 {
     margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .footer-column ul {
-    margin-top: 10px;
+    list-style: none;
+    padding: 0;
 }
 
 .footer-column ul li {
-    margin-bottom: 5px;
+    margin: 5px 0;
 }
 
-.footer-column ul li a {
+.footer-column ul a {
+    text-decoration: none;
     color: white;
-    font-size: 14px;
-    transition: color 0.3s;
 }
 
-.footer-column ul li a:hover {
-    color: #ffcccb;
+.footer-column ul a:hover {
+    background-color: #ad2020;
 }
 
-.footer-column p {
-    font-size: 14px;
+
+.footer-column.useful-link {
+    background-color: transparent; 
+    list-style: none; 
+}
+
+.footer-column.useful-link li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #555;
+    margin-top: 20px;
 }

@@ -23,7 +23,10 @@
                 <button type="submit">Kirim Testimoni</button>
             </form>
             <div id="reviewsContainer"></div>
+
             <p id="submitMessage" style="color: green; display: none;">Testimoni berhasil terkirim!</p>
+
+
         </section>
     </main>
 
@@ -31,6 +34,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
+
         // Fungsi untuk menyimpan testimoni ke localStorage
         function saveReview(name, text) {
             let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
@@ -76,6 +80,10 @@
 
         // Menampilkan testimoni ketika halaman dimuat
         displayReviews();
+
+        // Memanggil fungsi loadHeaderFooter yang sama
+        window.onload = loadHeaderFooter;
+
     </script>
 </body>
 </html>
