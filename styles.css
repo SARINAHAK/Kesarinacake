@@ -49,6 +49,53 @@ body {
     height: 24px;
 }
 
+/* styles.css */
+
+/* Gaya untuk form pencarian */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#search-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#search-button img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Gaya untuk hasil pencarian */
+.search-results {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 5px;
+}
+
+.search-results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
 .hero {
     height: 300px;
     background: url(bener.png) no-repeat center center/cover;
