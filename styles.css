@@ -30,7 +30,7 @@ body {
 }
 
 .navbar a:hover {
-    color: #007bff;
+    color: #5c5e5f;
 }
 
 .header-icons {
@@ -138,30 +138,30 @@ h2 {
     margin-bottom: 20px;
 }
 
-#contact-form {
+.contact-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-  }
+}
   
-  .form-group {
+.form-group {
     display: flex;
     flex-direction: column;
-  }
+}
+
   
-  .form-group input,
-  .form-group textarea {
+.form-group textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     resize: none; /* Disable resize for textarea */
-  }
+}
   
-  .form-group textarea {
+.form-group textarea {
     min-height: 100px;
-  }
+}
   
-  .submit-btn {
+.submit-btn {
     background-color: #25d366; /* Green color */
     color: #fff;
     padding: 10px 20px;
@@ -169,23 +169,25 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .submit-btn:hover {
+.submit-btn:hover {
     background-color: #ad2020; 
-  }
+}
+
 
 .product-title {
     color: #d4a373;
     font-size: 2rem;
     margin-bottom: 20px;
     text-align: center;
+    
 }
 
 
 .product-item {
     margin-bottom: 10px;
-    text-align: center;
+    text-align: left;
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -194,12 +196,12 @@ h2 {
 }
 
 .product-item:hover {
-    transform:10px;
+    transform:translate(10px);
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
 }
 
 .product-item img {
-    width: 100%;
+    width: 10%;
     max-width: 230px;
     height: auto;
     border-radius: 8px;
@@ -267,7 +269,7 @@ footer {
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
     gap: 20px;
     padding: 0 20px;
 }
@@ -292,7 +294,7 @@ footer {
 }
 
 .footer-column ul a:hover {
-    background-color: #ad2020;
+    background-color: #504c4c;
 }
 
 

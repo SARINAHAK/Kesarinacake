@@ -1,29 +1,17 @@
 <?php
-session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cart = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $productName = $_POST['name'];
-    $productPrice = $_POST['price'];
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
+    if (!empty($cart)) {
+        // Simulasi penyimpanan ke database atau pemrosesan checkout
+        echo json_encode(["status" => "success", "message" => "Checkout berhasil"]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Keranjang kosong"]);
     }
-
-    $found = false;
-    foreach ($_SESSION['cart'] as &$item) {
-        if ($item['name'] == $productName) {
-            $item['quantity'] += 1;
-            $found = true;
-            break;
-        }
-    }
-
-    if (!$found) {
-        $_SESSION['cart'][] = ['name' => $productName, 'price' => $productPrice, 'quantity' => 1];
-    }
-
-    echo json_encode($_SESSION['cart']);
+} else {
+    echo json_encode(["status" => "error", "message" => "Metode tidak valid"]);
 }
 ?>
+
 
 
