@@ -2,6 +2,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 0;
+<<<<<<< HEAD
+=======
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color: #e190a5;
+    color: white;
+    padding: 10px 20px;
+>>>>>>> c9b721d9409e51b2ba7c20e34f60feb291eeb30e
     text-align: center;
 }
 
