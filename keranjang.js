@@ -1,27 +1,14 @@
-let cartItems = [];
+function addToCart(name, price, id) {
+    const qty = document.getElementById(`qty-${id}`).value;
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function addToCart(productName, productPrice) {
-    // Periksa apakah produk sudah ada di keranjang
-    let existingItem = cartItems.find(item => item.name === productName);
-    if (existingItem) {
-        existingItem.quantity += 1; // Tambahkan jumlah produk jika sudah ada
+    const existingProduct = cart.find(item => item.name === name);
+    if (existingProduct) {
+        existingProduct.quantity += parseInt(qty);
     } else {
-        cartItems.push({ name: productName, price: productPrice, quantity: 1 });
+        cart.push({ name: name, price: price, quantity: parseInt(qty) });
     }
-    displayCart();
-}
 
-function displayCart() {
-    let cartDiv = document.getElementById('cart');
-    cartDiv.innerHTML = ''; // Kosongkan konten sebelumnya
-    if (cartItems.length === 0) {
-        cartDiv.innerHTML = '<p>Your cart is empty</p>';
-        return;
-    }
-    cartItems.forEach(item => {
-        cartDiv.innerHTML += `<p>${item.name} - $${item.price} x ${item.quantity}</p>`;
-    });
-    let total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartDiv.innerHTML += `<h3>Total: $${total.toFixed(2)}</h3>`;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(`${name} berhasil ditambahkan ke keranjang!`);
 }
-
