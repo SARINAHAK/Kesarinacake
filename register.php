@@ -1,3 +1,34 @@
+<?php
+    include "service/database.php";
+    session_start();
+
+    $register_message = "";
+    
+    if(isset($_SESSION["is_login"])) {
+        header("location: dashboard.php");
+    }
+
+    if (isset($_POST["register"])){
+        $Fullname = $_POST["Full_name"];
+        $Email = $_POST["Email"];
+        $Password = $_POST["Password"];
+
+        try {
+            $sql = "INSERT INTO users (Full_name, Email, Password) VALUES
+            ('$Fullname', '$Email' '$Password')";
+    
+            if ($db->query($sql)) {
+                $register_message = "Daftar akun berhasil, silakan login";
+            } else {
+                $register_message = "Daftar akun gagal, silakan coba lagi";
+            }
+        } catch (mysqli_sql_exception) {
+            $register_message = "Email sudah ada, silakan ganti email yang lain";
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
