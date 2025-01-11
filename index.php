@@ -185,5 +185,18 @@
             <p>&copy; <?php echo date("Y"); ?> Kesarina Cake</p>
         </div>
     </footer>
+
+    <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nama Produk</th>
+                            <th>Kategori</th>
+                            <th>Stok</th>
+                            <th>Harga</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+    </table
 </body>
 </html>
