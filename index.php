@@ -133,7 +133,7 @@
                 <a href="cari.html" class="cari">
                     <img src="https://www.freeiconspng.com/uploads/search-icon-png-0.png" alt="Cari" class="icon">
                 </a>
-                <a href="keranjang.html" class="Keranjang">
+                <a href="keranjang.php" class="Keranjang">
                     <img src="https://purepng.com/public/uploads/medium/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532325wtdqo.png" alt="Keranjang" class="icon">
                 </a>
                 <a href="login.html" class="Register">
@@ -162,6 +162,8 @@
                     <li><a href="produk.php">Produk</a></li>
                     <li><a href="kontak.php">Kontak</a></li>
                     <li><a href="login.php">Login</a></li>
+                    <li><a href="keranjang.php">Keranjang</a></li>
+
                 </ul>
             </div>
 
