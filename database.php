@@ -1,17 +1,16 @@
-<?php
-// Konfigurasi koneksi database
-$host = "localhost";  // Alamat server database
-$username = "root";   // Username database
-$password = "";       // Password database (kosong untuk default XAMPP)
-$database = "kesarinacake"; // Nama database
+<?php 
 
-// Membuat koneksi
-$conn = mysqli_connect($host, $username, $password, $database);
+$hostname = "localhost";
+$username = "root";
+$password = "";
+$database_name = "toko_kue";
 
-// Cek koneksi
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-} else {
-    // echo "Koneksi berhasil";
+$db = mysqli_connect($hostname, $username, $password, $database_name);
+
+if($db->connect_error) {
+    echo "koneksi database rusak";
+    die("error");
 }
+
+
 ?>

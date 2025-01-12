@@ -1,70 +1,64 @@
 <?php
-require "service/keranjangdatabase.php"; // Menghubungkan ke database
 session_start();
 
-// Simulasi data checkout (bisa berasal dari form atau keranjang belanja)
-$_SESSION['checkout'] = [
-    ['nama' => 'Chocolate Cake', 'harga' => 100000],
-    ['nama' => 'Strawberry Shortcake', 'harga' => 120000],
-    ['nama' => 'Cheesecake', 'harga' => 110000]
-];
+// Jika keranjang kosong
+if (empty($_SESSION['keranjang'])) {
+    $keranjang_kosong = true;
+} else {
+    $keranjang = $_SESSION['keranjang'];
+    $keranjang_kosong = false;
 
-// Mengambil data dari session
-$checkoutItems = $_SESSION['checkout'];
-
-// Menghitung total harga
-$totalHarga = 0;
-foreach ($checkoutItems as $item) {
-    $totalHarga += $item['harga'];
+    // Menghitung total harga
+    $totalHarga = 0;
+    foreach ($keranjang as $item) {
+        $totalHarga += $item['harga'];
+    }
 }
 
-// Proses form jika tombol checkout ditekan
+// Proses checkout
 if (isset($_POST['checkout'])) {
     $username = $_POST['nama'];
     $nomor = $_POST['nomor'];
     $alamat = $_POST['alamat'];
 
-    // Menyimpan ke database menggunakan prepared statement
-    $stmt = $db->prepare("INSERT INTO keranjang (username, nomor, alamat, total_harga) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $username, $nomor, $alamat, $totalHarga);
+    // Simulasi proses checkout
+    // Di sini Anda dapat menyimpan data checkout ke dalam database jika perlu
 
-    if ($stmt->execute()) {
-        $checkout_message = "Pemesanan berhasil! Anda akan segera dihubungi oleh tim kami.";
-        unset($_SESSION['checkout']); // Mengosongkan session checkout setelah berhasil
-    } else {
-        $checkout_message = "Proses pemesanan gagal. Silakan coba lagi.";
-    }
-    $stmt->close();
+    // Menampilkan pesan setelah checkout berhasil
+    $checkout_message = "Pemesanan berhasil! Anda akan segera dihubungi oleh tim kami.";
+    unset($_SESSION['keranjang']); // Kosongkan keranjang setelah pemesanan
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Kesarina Cake Shop</title>
+    <title>Keranjang - Kesarina Cake</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #fdf5e6;
-            text-align: center;
+            background-color: #f0f0f0;
+            text-align: center; /* Menambahkan agar konten di dalam body rata tengah */
         }
 
         h1 {
-            color: #8b4513;
+            color: #ad2020;
         }
 
         table {
-            width: 60%;
+            width: 80%;
             margin: 20px auto;
             border-collapse: collapse;
+            background-color: #fff;
+            margin-bottom: 20px;
         }
 
         table, th, td {
-            border: 1px solid #d2691e;
+            border: 1px solid #ad2020;
         }
 
         th, td {
@@ -73,72 +67,124 @@ if (isset($_POST['checkout'])) {
         }
 
         th {
-            background-color: #d2691e;
+            background-color: #ad2020;
             color: white;
         }
 
         .total {
             font-weight: bold;
-            color: #d2691e;
+            color: #ad2020;
         }
 
         .button {
             display: inline-block;
-            margin: 20px auto;
             padding: 10px 20px;
             font-size: 18px;
             color: white;
-            background-color: #d2691e;
+            background-color: #3498db;
             border: none;
             border-radius: 5px;
-            text-decoration: none;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .button:hover {
-            background-color: #a0522d;
+            background-color: #2980b9;
         }
+
+        .empty-message {
+            font-size: 18px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #c0392b;
+        }
+
+        .checkout-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout-form input, .checkout-form textarea, .checkout-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .checkout-form button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+
+        .checkout-form button:hover {
+            background-color: #2980b9;
+        }
+
     </style>
 </head>
 <body>
-    <?php include "layout/header.html"; ?>
+    <h1>Keranjang Belanja</h1>
 
-    <h1>Hasil Checkout</h1>
-
-    <table>
-        <tr>
-            <th>Nama Menu</th>
-            <th>Harga</th>
-        </tr>
-        <?php foreach ($checkoutItems as $item): ?>
+    <?php if ($keranjang_kosong): ?>
+        <p class="empty-message">Keranjang Anda masih kosong. Silakan tambahkan produk terlebih dahulu!</p>
+    <?php else: ?>
+        <table>
             <tr>
-                <td><?php echo $item['nama']; ?></td>
-                <td>Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></td>
+                <th>Nama Menu</th>
+                <th>Harga</th>
             </tr>
-        <?php endforeach; ?>
-        <tr>
-            <td class="total">Total Harga</td>
-            <td class="total">Rp <?php echo number_format($totalHarga, 0, ',', '.'); ?></td>
-        </tr>
-    </table>
+            <?php foreach ($keranjang as $item): ?>
+                <tr>
+                    <td><?php echo $item['nama']; ?></td>
+                    <td>Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td class="total">Total Harga</td>
+                <td class="total">Rp <?php echo number_format($totalHarga, 0, ',', '.'); ?></td>
+            </tr>
+        </table>
+    <?php endif; ?>
 
-    <p>Terima kasih telah berbelanja di Kesarina Cake Shop!</p>
-
-    <!-- Form Checkout -->
-    <h3>Isi Data Anda untuk Checkout</h3>
-    <form action="" method="POST">
-        <input type="text" name="nama" placeholder="Nama" required>
-        <input type="text" name="nomor" placeholder="Nomor Telepon" required>
-        <textarea name="alamat" placeholder="Alamat Lengkap" required></textarea>
-        <button type="submit" name="checkout">Checkout Sekarang</button>
-    </form>
+    <?php if (!$keranjang_kosong): ?>
+        <div class="checkout-form">
+            <h3>Isi Data Anda untuk Checkout</h3>
+            <form method="POST">
+                <input type="text" name="nama" placeholder="Nama" required>
+                <input type="text" name="nomor" placeholder="Nomor Telepon" required>
+                <textarea name="alamat" placeholder="Alamat Lengkap" required></textarea>
+                <button type="submit" name="checkout" class="button">Checkout Sekarang</button>
+            </form>
+        </div>
+    <?php endif; ?>
 
     <p><?php echo isset($checkout_message) ? $checkout_message : ''; ?></p>
 
-    <?php include "layout/footer.html"; ?>
+    <!-- Tombol Kembali ke Menu -->
+    <a href="menu.php" class="back-button">Kembali ke Menu</a>
+
 </body>
 </html>
-
-
-
-
