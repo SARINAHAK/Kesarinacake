@@ -1,17 +1,12 @@
 <?php
+session_start();
 include('koneksi.php');
+
+$error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-    if ($password !== $confirmPassword) {
-        echo "Password dan konfirmasi password tidak cocok!";
-        exit();
-    }
-
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ?");
     $stmt->bind_param('s', $email);
@@ -19,20 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Email sudah terdaftar!";
-        exit();
-    }
-
-    $stmt = $db->prepare("INSERT INTO login_register (email, password) VALUES (?, ?)");
-    $stmt->bind_param('ss', $email, $hashed_password);
-
-    if ($stmt->execute()) {
-        echo "Registrasi berhasil! Silakan <a href='login.php'>Login</a>";
+        $user = $result->fetch_assoc();
+        
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            header("Location: index.html");
+            exit();
+        } else {
+            $error_message = "Password salah!";
+        }
     } else {
-        echo "Error: " . $stmt->error;
+        $error_message = "Email tidak ditemukan!";
     }
-
-    $stmt->close();
 }
 ?>
 
@@ -41,8 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrasi Pengguna</title>
+    <title>Login Pengguna</title>
     <style>
+        /* Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
@@ -94,6 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         button:hover {
             background-color: #e59420;
         }
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+        }
         p {
             text-align: center;
             margin-top: 1rem;
@@ -102,23 +101,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="form-container">
-        <h1>Daftar Akun</h1>
-        <form method="POST" action="register.php">
+        <h1>Login</h1>
+        <form method="POST" action="login.php">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                <input type="password" id="password" name="password" placeholder="Masukkan password anda" required>
             </div>
-            <div class="form-group">
-                <label for="confirmPassword">Konfirmasi Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Masukkan ulang password" required>
-            </div>
-            <button type="submit">Daftar</button>
+            <button type="submit">Login</button>
         </form>
-        <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
+        <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+        <p><?php echo $error_message; ?></p>
     </div>
 </body>
 </html>
