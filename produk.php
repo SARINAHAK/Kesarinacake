@@ -1,3 +1,34 @@
+<?php
+session_start();
+
+// Simulasi produk dari database
+$produk = [
+    ['id' => 1, 'nama' => 'Kue Ulang Tahun', 'harga' => 100000, 'gambar' => 'kue ulang tahun.jpeg'],
+    ['id' => 2, 'nama' => 'Kue Pernikahan', 'harga' => 300000, 'gambar' => 'kue pernikahan.jpeg'],
+    ['id' => 3, 'nama' => 'Brownies', 'harga' => 100000, 'gambar' => 'kue Brownies.jpeg'],
+    ['id' => 4, 'nama' => 'Kue Pernikahan Hijau', 'harga' => 300000, 'gambar' => 'kue pernikahan hijau.jpg'],
+    // Tambahkan produk lainnya
+];
+
+// Menambahkan produk ke keranjang saat tombol ditekan
+if (isset($_POST['tambah_ke_keranjang'])) {
+    $id_produk = $_POST['id_produk'];
+
+    // Cari produk berdasarkan ID
+    foreach ($produk as $item) {
+        if ($item['id'] == $id_produk) {
+            // Simpan produk ke session keranjang
+            $_SESSION['keranjang'][] = $item;
+            break;
+        }
+    }
+
+    // Redirect ke halaman keranjang
+    header("Location: keranjang.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -5,7 +36,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produk - Kesarina Cake</title>
     <style>
-        /* Gaya tampilan halaman */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -13,10 +43,10 @@
             background-color: #ad2020;
         }
         main {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 20px auto;
             padding: 20px;
-            background-color:rgb(240, 223, 223);
+            background-color: rgb(240, 223, 223);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -59,13 +89,6 @@
             color: #e67e22;
             font-weight: bold;
         }
-        input[type="number"] {
-            width: 60px;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            text-align: center;
-        }
         button {
             background-color: #3498db;
             color: white;
@@ -85,78 +108,17 @@
             <h2>Produk</h2>
             <p>Berikut adalah beberapa produk kami:</p>
             
+            <?php foreach ($produk as $item): ?>
             <div class="product-item">
-                <img src="kue ulang tahun.jpeg" alt="Kue Ulang Tahun">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 100.000</p>
+                <img src="<?php echo $item['gambar']; ?>" alt="<?php echo $item['nama']; ?>">
+                <h3><?php echo $item['nama']; ?></h3>
+                <p>Harga: Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></p>
+                <form method="POST" action="">
+                    <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
+                    <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
+                </form>
             </div>
-
-            <div class="product-item">
-                <img src="kue pernikahan.jpeg" alt="Kue Pernikahan">
-                <h3>Kue Pernikahan</h3>
-                <p>Harga: Rp 300.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue Brownies.jpeg" alt="Brownies">
-                <h3>Brownies</h3>
-                <p>Harga: Rp 100.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue pernikahan hijau.jpg" alt="Kue Pernikahan Hijau">
-                <h3>Kue Pernikahan Hijau</h3>
-                <p>Harga: Rp 300.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue simple hijau.jpg" alt="Kue Ulang Tahun Simple">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 50.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ulang tahun biru.jpg" alt="Kue Ulang Tahun Biru">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 100.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ulang tahun orens.jpg" alt="Kue Ulang Tahun Orens">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 50.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ultah anak sofia.jpg" alt="Kue Ulang Tahun Anak Sofia">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 200.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ultah anak spider man.jpg" alt="Kue Ulang Tahun Spider-Man">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 250.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ultah bir.jpg" alt="Kue Ulang Tahun">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 350.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ultah bunga.jpg" alt="Kue Ulang Tahun Bunga">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 100.000</p>
-            </div>
-
-            <div class="product-item">
-                <img src="kue ultah miki mouse.jpg" alt="Kue Ulang Tahun Miki Mouse">
-                <h3>Kue Ulang Tahun</h3>
-                <p>Harga: Rp 250.000</p>
-            </div>
-
+            <?php endforeach; ?>
         </section>
     </main>
 </body>
