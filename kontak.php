@@ -68,10 +68,10 @@
         $pesan = htmlspecialchars($_POST['pesan']);
 
         // Format pesan untuk WhatsApp
-        $whatsapp_message = "Halo, saya ingin bertanya mengenai produk Kesarina Cake.%0ANama: $nama%0AEmail: $email%0APesan: $pesan";
+        $whatsapp_message = "Halo, saya ingin bertanya mengenai produk Kesarina Cake. Nama: $nama  Email: $email Pesan: $pesan";
 
         // Nomor WhatsApp tujuan (ganti dengan nomor Anda)
-        $whatsapp_number = "6285298770635";
+        $whatsapp_number = "6282339782015";
 
         // Redirect ke WhatsApp
         echo "<script>

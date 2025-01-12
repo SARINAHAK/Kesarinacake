@@ -81,38 +81,153 @@
 </head>
 <body>
 
+<main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.php">Beranda</a> / <span>produk</span>
+        </div>
+        
+
 <main>
-    <section>
-        <h2>Produk</h2>
-        <p>Berikut adalah beberapa produk unggulan dari Kesarina Cake:</p>
+    
+
+        <html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk - Kesarina Cake</title>
+    <link rel="stylesheet" href="produk.css">
+</head>
+<body>
+   
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section>
+            <h2>Produk</h2>
+            <p>Berikut adalah beberapa produk kami:</p>
+            <div class="product-item">
+                <img src="kue ulang tahun.jpeg" alt="Kue Ulang Tahun" width="230" height="280" />
+                <h3>Kue Ulang Tahun</h3>
+                <p>Harga: Rp 100.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue pernikahan.jpeg" alt="Kue Pernikahan" width="230" height="280" />
+                <h3>Kue Pernikahan</h3>
+                <p>Harga: Rp 300.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue Brownies.jpeg" alt="Brownies" width="230" height="280" />
+                <h3>Brownies</h3>
+                <p>Harga: Rp 100.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue pernikahan hijau.jpg" alt="kue pernikahan Hijau" width="230" height="280" />
+                <h3>kue pernikahan Hijau</h3>
+                <p>Harga: Rp 300.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue simple hijau.jpg" alt="kue ulang tahun simple" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 50.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ulang tahun biru.jpg" alt="kue ulang tahun biru" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 100.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ulang tahun orens.jpg" alt="kue ulang tahun orens" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 50.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ultah anak sofia.jpg" alt="kue ulang tahun anak sofia" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 200.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ultah anak spider man.jpg" alt="kue ulang tahun" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 250.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ultah bir.jpg" alt="kue ulang tahun" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 350.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ultah bunga.jpg" alt="kue ulang tahun" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 100.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            <div class="product-item">
+                <img src="kue ultah miki mouse.jpg" alt="kue ulang tahun" width="230" height="280" />
+                <h3>kue ulang tahun</h3>
+                <p>Harga: Rp 250.000</p>
+                <input type="number" min="1" value="1" id="qty-2">
+                <button onclick="addToCart('Tahu Skotel', 5000, 2)">Tambah ke Keranjang</button>
+            </div>
+            
+        </section>
+    </main>
+
+</body>
+</html>
+
 
         <?php
-        // Daftar produk
-        $products = [
-            ["image" => "kue ulang tahun.jpeg", "name" => "Kue Ulang Tahun", "price" => 100000],
-            ["image" => "kue pernikahan.jpeg", "name" => "Kue Pernikahan", "price" => 300000],
-            ["image" => "kue Brownies.jpeg", "name" => "Brownies", "price" => 100000],
-            ["image" => "kue pernikahan hijau.jpg", "name" => "Kue Pernikahan Hijau", "price" => 300000],
-            ["image" => "kue simple hijau.jpg", "name" => "Kue Ulang Tahun Sederhana", "price" => 50000],
-            ["image" => "kue ulang tahun biru.jpg", "name" => "Kue Ulang Tahun Biru", "price" => 100000],
-            ["image" => "kue ulang tahun orens.jpg", "name" => "Kue Ulang Tahun Oranye", "price" => 50000],
-            ["image" => "kue ultah anak sofia.jpg", "name" => "Kue Ulang Tahun Sofia", "price" => 200000],
-            ["image" => "kue ultah anak spider man.jpg", "name" => "Kue Ulang Tahun Spiderman", "price" => 250000],
-            ["image" => "kue ultah bir.jpg", "name" => "Kue Ulang Tahun Bir", "price" => 350000],
-            ["image" => "kue ultah bunga.jpg", "name" => "Kue Ulang Tahun Bunga", "price" => 100000],
-            ["image" => "kue ultah miki mouse.jpg", "name" => "Kue Ulang Tahun Mickey Mouse", "price" => 250000]
-        ];
+        // Menghubungkan ke database
+        include 'database.php';
 
-        // Tampilkan produk
-        foreach ($products as $product) {
-            echo '<div class="product-item">';
-            echo '<img src="' . $product["image"] . '" alt="' . $product["name"] . '">';
-            echo '<h3>' . $product["name"] . '</h3>';
-            echo '<p>Harga: Rp ' . number_format($product["price"], 0, ',', '.') . '</p>';
-            echo '<input type="number" min="1" value="1">';
-            echo '<button>Tambah ke Keranjang</button>';
-            echo '</div>';
+        // Query untuk mengambil data produk dari tabel menu
+        $query = "SELECT nama_product, harga_product, gambar_product, Stock FROM produk";
+        $result = mysqli_query($conn, $query);
+
+        // Periksa apakah koneksi dan query berhasil
+        if (!$result) {
+            die("Query gagal: " . mysqli_error($conn));
         }
+
+        // Periksa apakah ada hasil
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<div class="product-item">';
+                echo '<img src="' . htmlspecialchars($row["gambar_product"]) . '" alt="' . htmlspecialchars($row["nama_product"]) . '">';
+                echo '<h3>' . htmlspecialchars($row["nama_product"]) . '</h3>';
+                echo '<p>Harga: Rp ' . number_format($row["harga_product"], 0, ',', '.') . '</p>';
+                echo '<p>Stok: ' . htmlspecialchars($row["Stock"]) . '</p>';
+                echo '<input type="number" min="1" max="' . htmlspecialchars($row["Stock"]) . '" value="1">';
+                echo '<button>Tambah ke Keranjang</button>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>Tidak ada produk tersedia saat ini.</p>';
+        }
+
+        // Tutup koneksi database
+        mysqli_close($conn);
         ?>
     </section>
 </main>

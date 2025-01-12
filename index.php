@@ -125,9 +125,9 @@
     <header>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="produk.html">Produk</a></li>
-                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="index.php">Beranda</a></li>
+                <li><a href="produk.php">Produk</a></li>
+                <li><a href="kontak.php">Kontak</a></li>
             </ul>
             <div class="nav-icons">
                 <a href="cari.html" class="cari">
@@ -150,17 +150,18 @@
     </div>
     
     </section>
-
     <!-- Footer Section -->
+
+    
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
                 <h3>USEFUL LINK</h3>
                 <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="produk.html">Produk</a></li>
-                    <li><a href="kontak.html">Kontak</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="index.php">Beranda</a></li>
+                    <li><a href="produk.php">Produk</a></li>
+                    <li><a href="kontak.php">Kontak</a></li>
+                    <li><a href="login.php">Login</a></li>
                 </ul>
             </div>
 
