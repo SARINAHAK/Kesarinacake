@@ -1,37 +1,4 @@
 <?php
-<<<<<<< HEAD
-include "database.php";
-session_start();
-
-$register_message = "";
-
-if (isset($_SESSION["is_login"])) {
-    header("location: dashboard.php");
-    exit();
-}
-
-if (isset($_POST["register"])) {
-    $Fullname = $_POST["Full_name"];
-    $Email = $_POST["Email"];
-    $Password = $_POST["Password"];
-
-    // Hash password
-    $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-
-    try {
-        $sql = "INSERT INTO users (Full_name, Email, Password) VALUES (?, ?, ?)";
-        $stmt = $db->prepare($sql);
-        $stmt->bind_param("sss", $Fullname, $Email, $hashedPassword);
-
-        if ($stmt->execute()) {
-            $register_message = "Daftar akun berhasil, silakan login";
-        } else {
-            $register_message = "Daftar akun gagal, silakan coba lagi";
-        }
-    } catch (mysqli_sql_exception $e) {
-        $register_message = "Email sudah ada, silakan ganti email yang lain";
-    }
-=======
 include('koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -66,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
->>>>>>> bb7fc2105db8ed187afdce9697d3d9bd80d697ff
 }
 ?>
 
@@ -137,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="form-container">
         <h1>Daftar Akun</h1>
-<<<<<<< HEAD
         <?php if ($register_message): ?>
             <p><?php echo $register_message; ?></p>
         <?php endif; ?>
@@ -151,37 +116,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="email">Email</label>
                 <input type="email" id="email" name="Email" placeholder="Masukkan email anda" required>
                 <small class="error-message" id="emailError"></small>
-=======
         <form method="POST" action="register.php">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
->>>>>>> bb7fc2105db8ed187afdce9697d3d9bd80d697ff
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-<<<<<<< HEAD
                 <input type="password" id="password" name="Password" placeholder="Masukkan password" required>
                 <small>Password minimal 6 karakter.</small>
-=======
                 <input type="password" id="password" name="password" placeholder="Masukkan password" required>
->>>>>>> bb7fc2105db8ed187afdce9697d3d9bd80d697ff
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Konfirmasi Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Masukkan ulang password" required>
             </div>
-<<<<<<< HEAD
 
             <button type="submit" name="register">Daftar</button>
         </form>
 
         <p>sudah punya akun? <a href="login.html">Login di sini</a></p>
-=======
             <button type="submit">Daftar</button>
         </form>
         <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
->>>>>>> bb7fc2105db8ed187afdce9697d3d9bd80d697ff
     </div>
 </body>
 </html>
