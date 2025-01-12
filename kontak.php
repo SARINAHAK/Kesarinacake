@@ -43,7 +43,7 @@
 <body>
     <main class="main-content">
         <div class="breadcrumb">
-            <a href="index.html">Beranda</a> / <span>Kontak</span>
+            <a href="index.php">Beranda</a> / <span>Kontak</span>
         </div>
         <h2>Kontak</h2>
 
@@ -59,3 +59,25 @@
             <button type="submit" class="submit-btn">Kirim ke WhatsApp</button>
         </form>
     </main>
+
+    <?php
+    // Kode PHP untuk menangani form
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nama = htmlspecialchars($_POST['nama']);
+        $email = htmlspecialchars($_POST['email']);
+        $pesan = htmlspecialchars($_POST['pesan']);
+
+        // Format pesan untuk WhatsApp
+        $whatsapp_message = "Halo, saya ingin bertanya mengenai produk Kesarina Cake. Nama: $nama  Email: $email Pesan: $pesan";
+
+        // Nomor WhatsApp tujuan (ganti dengan nomor Anda)
+        $whatsapp_number = "6282339782015";
+
+        // Redirect ke WhatsApp
+        echo "<script>
+                window.location.href = 'https://wa.me/$whatsapp_number?text=" . urlencode($whatsapp_message) . "';
+              </script>";
+    }
+    ?>
+</body>
+</html>
