@@ -117,11 +117,44 @@
             margin-top: 20px;
         }
 
+        .search-box {
+            display: none; 
+            margin-right: 10px; 
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box input {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-box button {
+            background-color: #ad2020;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .search-box button:hover {
+            background-color: #ad2020;
+        }
+
+        .search-box.active {
+            display: block;
+        }
+
+
     </style>
 </head>
 
 <body>
-    <!-- Header Section -->
     <header>
         <nav class="navbar">
             <ul class="nav-links">
@@ -130,9 +163,17 @@
                 <li><a href="kontak.php">Kontak</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="cari.html" class="cari">
+            <div class="search-box" id="searchBox">
+                <form method="GET" action="index.php">
+                    <input type="text" name="query" placeholder="Cari produk..." required>
+                    <button type="submit">Cari</button>
+                </form>
+            </div>
+
+                <a href="javascript:void(0);" class="cari" onclick="toggleSearchBox()">
                     <img src="https://www.freeiconspng.com/uploads/search-icon-png-0.png" alt="Cari" class="icon">
                 </a>
+
                 <a href="keranjang.php" class="Keranjang">
                     <img src="https://purepng.com/public/uploads/medium/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532325wtdqo.png" alt="Keranjang" class="icon">
                 </a>
@@ -148,11 +189,8 @@
         <div class="hero-overlay">
             <h1>Selamat Datang di Kesarina Cake</h1>
     </div>
-    
     </section>
-    <!-- Footer Section -->
 
-    
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
@@ -162,8 +200,6 @@
                     <li><a href="produk.php">Produk</a></li>
                     <li><a href="kontak.php">Kontak</a></li>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="keranjang.php">Keranjang</a></li>
-
                 </ul>
             </div>
 
@@ -189,6 +225,14 @@
         </div>
     </footer>
 
-    
+
+    <script>
+        function toggleSearchBox() {
+            var searchBox = document.getElementById('searchBox');
+            searchBox.classList.toggle('active'); 
+        }
+    </script>
+
+
 </body>
 </html>
