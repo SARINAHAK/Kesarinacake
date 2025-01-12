@@ -81,10 +81,7 @@
 </head>
 <body>
 
-<main class="main-content">
-        <div class="breadcrumb">
-            <a href="index.php">Beranda</a> / <span>produk</span>
-        </div>
+
         
 
 <main>
@@ -95,13 +92,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produk - Kesarina Cake</title>
-    <link rel="stylesheet" href="produk.css">
 </head>
 <body>
    
     <div id="header-placeholder"></div>
 
     <main>
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">Beranda</a> / <span>Kontak</span>
+            </div>
         <section>
             <h2>Produk</h2>
             <p>Berikut adalah beberapa produk kami:</p>
@@ -197,40 +197,4 @@
 </html>
 
 
-        <?php
-        // Menghubungkan ke database
-        include 'database.php';
-
-        // Query untuk mengambil data produk dari tabel menu
-        $query = "SELECT nama_product, harga_product, gambar_product, Stock FROM produk";
-        $result = mysqli_query($conn, $query);
-
-        // Periksa apakah koneksi dan query berhasil
-        if (!$result) {
-            die("Query gagal: " . mysqli_error($conn));
-        }
-
-        // Periksa apakah ada hasil
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<div class="product-item">';
-                echo '<img src="' . htmlspecialchars($row["gambar_product"]) . '" alt="' . htmlspecialchars($row["nama_product"]) . '">';
-                echo '<h3>' . htmlspecialchars($row["nama_product"]) . '</h3>';
-                echo '<p>Harga: Rp ' . number_format($row["harga_product"], 0, ',', '.') . '</p>';
-                echo '<p>Stok: ' . htmlspecialchars($row["Stock"]) . '</p>';
-                echo '<input type="number" min="1" max="' . htmlspecialchars($row["Stock"]) . '" value="1">';
-                echo '<button>Tambah ke Keranjang</button>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>Tidak ada produk tersedia saat ini.</p>';
-        }
-
-        // Tutup koneksi database
-        mysqli_close($conn);
-        ?>
-    </section>
-</main>
-
-</body>
-</html>
+        
