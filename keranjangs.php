@@ -1,5 +1,5 @@
 <?php
-require "service/database.php";
+
 // Memulai session
 session_start();
 
