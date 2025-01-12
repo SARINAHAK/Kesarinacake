@@ -1,37 +1,49 @@
 <?php
+// Include the database connection
 include('koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
+    // Check if passwords match
     if ($password !== $confirmPassword) {
         echo "Password dan konfirmasi password tidak cocok!";
         exit();
     }
 
+    // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ?");
-    $stmt->bind_param('s', $email);
+    // Prepare a statement to check if the email or username is already registered
+    $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ? OR username = ?");
+    $stmt->bind_param('ss', $email, $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Check if the email or username is already taken
     if ($result->num_rows > 0) {
-        echo "Email sudah terdaftar!";
+        echo "Email atau Username sudah terdaftar!";
         exit();
     }
 
-    $stmt = $db->prepare("INSERT INTO login_register (email, password) VALUES (?, ?)");
-    $stmt->bind_param('ss', $email, $hashed_password);
+    // Insert new user into the database
+    $stmt = $db->prepare("INSERT INTO login_register (username, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param('sss', $username, $email, $hashed_password);
 
+    // Execute the insert query and check for success
     if ($stmt->execute()) {
         echo "Registrasi berhasil! Silakan <a href='login.php'>Login</a>";
     } else {
         echo "Error: " . $stmt->error;
     }
 
+    header("Location: index.php");
+
+
+    // Close the statement
     $stmt->close();
 }
 ?>
@@ -103,39 +115,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="form-container">
         <h1>Daftar Akun</h1>
-        <?php if ($register_message): ?>
-            <p><?php echo $register_message; ?></p>
-        <?php endif; ?>
-        <form id="registerForm" method="POST" action="register.php">
-            <div class="form-group">
-                <label for="name">Nama Lengkap</label>
-                <input type="text" id="name" name="Full_name" placeholder="Masukkan nama anda" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="Email" placeholder="Masukkan email anda" required>
-                <small class="error-message" id="emailError"></small>
         <form method="POST" action="register.php">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+            </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="Password" placeholder="Masukkan password" required>
-                <small>Password minimal 6 karakter.</small>
                 <input type="password" id="password" name="password" placeholder="Masukkan password" required>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Konfirmasi Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Masukkan ulang password" required>
             </div>
-
-            <button type="submit" name="register">Daftar</button>
-        </form>
-
-        <p>sudah punya akun? <a href="login.html">Login di sini</a></p>
             <button type="submit">Daftar</button>
         </form>
         <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>

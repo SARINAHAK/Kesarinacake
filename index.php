@@ -116,7 +116,7 @@
             border-top: 1px solid #555;
             margin-top: 20px;
         }
-        .footer-
+
     </style>
 </head>
 
@@ -136,7 +136,7 @@
                 <a href="keranjang.php" class="Keranjang">
                     <img src="https://purepng.com/public/uploads/medium/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532325wtdqo.png" alt="Keranjang" class="icon">
                 </a>
-                <a href="login.html" class="Register">
+                <a href="login.php" class="Register">
                     <img src="https://icon-library.com/images/login-icon/login-icon-3.jpg" alt="Login" class="icon">
                 </a>
             </div>
@@ -189,17 +189,6 @@
         </div>
     </footer>
 
-    <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nama Produk</th>
-                            <th>Kategori</th>
-                            <th>Stok</th>
-                            <th>Harga</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-    </table
+    
 </body>
 </html>
