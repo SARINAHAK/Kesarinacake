@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,15 +19,6 @@
             color: #333;
             background-color: #ad2020;
         }
-=======
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Kesarina Cake - Aplikasi Web</title>
-     <link rel="stylesheet" href="index.css">
-    
- </head>
->>>>>>> e562afc6f3e7f30aa97cfcfb63a77c3e3dfb5c2d
 
        
         .navbar ul {
@@ -126,7 +116,7 @@
             border-top: 1px solid #555;
             margin-top: 20px;
         }
-    
+
     </style>
 </head>
 
@@ -135,18 +125,18 @@
     <header>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="produk.html">Produk</a></li>
-                <li><a href="kontak.tmlh">Kontak</a></li>
+                <li><a href="index.php">Beranda</a></li>
+                <li><a href="produk.php">Produk</a></li>
+                <li><a href="kontak.php">Kontak</a></li>
             </ul>
             <div class="nav-icons">
                 <a href="cari.html" class="cari">
                     <img src="https://www.freeiconspng.com/uploads/search-icon-png-0.png" alt="Cari" class="icon">
                 </a>
-                <a href="keranjang.html" class="Keranjang">
+                <a href="keranjang.php" class="Keranjang">
                     <img src="https://purepng.com/public/uploads/medium/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532325wtdqo.png" alt="Keranjang" class="icon">
                 </a>
-                <a href="login.html" class="Register">
+                <a href="login.php" class="Register">
                     <img src="https://icon-library.com/images/login-icon/login-icon-3.jpg" alt="Login" class="icon">
                 </a>
             </div>
@@ -168,10 +158,12 @@
             <div class="footer-column">
                 <h3>USEFUL LINK</h3>
                 <ul>
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="produk.html">Produk</a></li>
-                    <li><a href="kontak.html">Kontak</a></li>
+                    <li><a href="index.php">Beranda</a></li>
+                    <li><a href="produk.php">Produk</a></li>
+                    <li><a href="kontak.php">Kontak</a></li>
                     <li><a href="login.php">Login</a></li>
+                    <li><a href="keranjang.php">Keranjang</a></li>
+
                 </ul>
             </div>
 
@@ -197,5 +189,6 @@
         </div>
     </footer>
 
+    
 </body>
 </html>
