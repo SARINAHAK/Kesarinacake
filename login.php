@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Pengguna</title>
     <style>
-        /* Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
@@ -50,52 +49,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .form-container {
             background: white;
-            padding: 2rem;
+            padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
         }
         h1 {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
             text-align: center;
             color: #333;
         }
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
         }
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
             color: #555;
         }
         input {
             width: 100%;
-            padding: 0.8rem;
+            padding: 15px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 20px;
         }
         button {
             width: 100%;
-            padding: 0.8rem;
+            padding: 15px;
             border: none;
-            background-color: #f5a623;
+            background-color: #ad2020;
             color: white;
-            font-size: 1rem;
+            font-size: 20px;
             border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #e59420;
+            background-color: #ad2020;
         }
         .error-message {
             color: red;
-            font-size: 0.9rem;
+            font-size: 18px;
         }
         p {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 15px;
         }
     </style>
 </head>
