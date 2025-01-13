@@ -7,7 +7,15 @@ $produk = [
     ['id' => 2, 'nama' => 'Kue Pernikahan', 'harga' => 300000, 'gambar' => 'kue pernikahan.jpeg'],
     ['id' => 3, 'nama' => 'Brownies', 'harga' => 100000, 'gambar' => 'kue Brownies.jpeg'],
     ['id' => 4, 'nama' => 'Kue Pernikahan Hijau', 'harga' => 300000, 'gambar' => 'kue pernikahan hijau.jpg'],
-    // Tambahkan produk lainnya
+    ['id' => 5, 'nama' => 'Kue Ulang Tahun Simple', 'harga' => 50000, 'gambar' => 'kue simple hijau.jpg'],
+    ['id' => 6, 'nama' => 'Kue Ulang Tahun Biru', 'harga' => 100000, 'gambar' => 'kue ulang tahun biru.jpg'],
+    ['id' => 7, 'nama' => 'Kue Ulang Tahun Orens', 'harga' => 50000, 'gambar' => 'kue ulang tahun orens.jpg'],
+    ['id' => 8, 'nama' => 'Kue Ulang Tahun Anak Sofia', 'harga' => 200000, 'gambar' => 'kue ultah anak sofia.jpg'],
+    ['id' => 9, 'nama' => 'Kue Ulang Tahun Spider-Man', 'harga' => 250000, 'gambar' => 'kue ultah anak spider man.jpg'],
+    ['id' => 10, 'nama' => 'Kue Ulang Tahun Bir', 'harga' => 350000, 'gambar' => 'kue ultah bir.jpg'],
+    ['id' => 11, 'nama' => 'Kue Ulang Tahun Bunga', 'harga' => 100000, 'gambar' => 'kue ultah bunga.jpg'],
+    ['id' => 12, 'nama' => 'Kue Ulang Tahun Miki Mouse', 'harga' => 250000, 'gambar' => 'kue ultah miki mouse.jpg'],
+    ['id' => 13, 'nama' => 'Kue Perayaan Komuni Pertama', 'harga' => 250000, 'gambar' => 'kue perayaan komuni pertama.jpg'],
 ];
 
 // Menambahkan produk ke keranjang saat tombol ditekan
@@ -42,6 +50,16 @@ if (isset($_POST['tambah_ke_keranjang'])) {
             padding: 0;
             background-color: #ad2020;
         }
+        .breadcrumb {
+            font-size: 14px;
+            margin: 10px 0;
+            white-space:wrap; /* Mencegah teks terputus ke baris baru */
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
         main {
             max-width: 1000px;
             margin: 20px auto;
@@ -102,6 +120,10 @@ if (isset($_POST['tambah_ke_keranjang'])) {
         }
     </style>
 </head>
+<main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.php">Beranda</a> / <span>Kontak</span>
+        </div>
 <body>
     <main>
         <section>

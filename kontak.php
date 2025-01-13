@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontak - Kesarina Cake</title>
     <style>
         /* Gaya untuk formulir kontak */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        
 
         .form-group {
             display: flex;
             flex-direction: column;
+           text-align: center;
+        }
+        .form-group input{
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            
         }
 
         .form-group textarea {
@@ -22,7 +25,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             resize: none;
-            min-height: 100px;
+            min-height: 200px;
         }
 
         .submit-btn {
@@ -50,8 +53,8 @@
         <!-- Form Kontak -->
         <form method="POST" action="">
             <div class="form-group">
-                <input type="text" name="nama" placeholder="Nama" required>
-                <input type="email" name="email" placeholder="Email" required>
+                <input  type="text" name="nama" placeholder="Nama" required>
+                <input  type="email" name="email" placeholder="Email" required>
             </div>
             <div class="form-group">
                 <textarea name="pesan" placeholder="Pesan Anda" rows="5" required></textarea>
