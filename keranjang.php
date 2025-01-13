@@ -17,6 +17,21 @@ if (empty($_SESSION['keranjang'])) {
     }
 }
 
+
+if (isset($_POST['hapus']) && isset($_POST['hapus_index'])) {
+    $index = $_POST['hapus_index'];
+    
+    // Hapus item dari session keranjang berdasarkan index
+    unset($_SESSION['keranjang'][$index]);
+    
+    // Re-index array keranjang agar index tetap berurutan
+    $_SESSION['keranjang'] = array_values($_SESSION['keranjang']);
+    
+    // Redirect ke halaman keranjang untuk menghindari resubmission form
+    header("Location: keranjang.php");
+    exit;
+}
+
 // Proses checkout
 if (isset($_POST['checkout'])) {
     $username = $_POST['nama'];
@@ -167,16 +182,25 @@ if (isset($_POST['checkout'])) {
             <tr>
                 <th>Nama Menu</th>
                 <th>Harga</th>
+                <th>Aksi</th> <!-- Kolom baru untuk tombol hapus -->
             </tr>
-            <?php foreach ($keranjang as $item): ?>
+            <?php foreach ($keranjang as $index => $item): ?>
                 <tr>
                     <td><?php echo $item['nama']; ?></td>
                     <td>Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></td>
+                    <td>
+                        <!-- Tombol Hapus mengirimkan index item yang ingin dihapus -->
+                        <form action="keranjang.php" method="POST" style="display:inline;">
+                            <input type="hidden" name="hapus_index" value="<?php echo $index; ?>">
+                            <button type="submit" name="hapus" class="button" style="background-color: #e74c3c;">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             <tr>
                 <td class="total">Total Harga</td>
                 <td class="total">Rp <?php echo number_format($totalHarga, 0, ',', '.'); ?></td>
+                <td></td>
             </tr>
         </table>
     <?php endif; ?>
