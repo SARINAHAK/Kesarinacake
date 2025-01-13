@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $confirmPassword) {
         echo "Password dan konfirmasi password tidak cocok!";
         exit();
+    }
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -33,12 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Error: " . $stmt->error;
     }
 
-    header("Location: index.php");
-
     $stmt->close();
-    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
