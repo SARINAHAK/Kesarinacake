@@ -1,4 +1,6 @@
 <?php
+
+include "database.php";
 session_start();
 
 // Jika keranjang kosong
@@ -20,6 +22,16 @@ if (isset($_POST['checkout'])) {
     $username = $_POST['nama'];
     $nomor = $_POST['nomor'];
     $alamat = $_POST['alamat'];
+
+    // $sql = "INSERT INTO keranjang (nama, nomor, alamat) VALUES ('$username', '$nomor', '$alamat')";
+
+    // if($db->query($sql)) {unset($_SESSION['keranjang']); 
+
+    //     echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
+    // }else {
+    //     echo "checkout gagal, cek jaringan anda";
+    // }
+    // unset($_SESSION['keranjang']); 
 
     // Simulasi proses checkout
     // Di sini Anda dapat menyimpan data checkout ke dalam database jika perlu
@@ -172,7 +184,7 @@ if (isset($_POST['checkout'])) {
     <?php if (!$keranjang_kosong): ?>
         <div class="checkout-form">
             <h3>Isi Data Anda untuk Checkout</h3>
-            <form method="POST">
+            <form action = "keranjang.php" method="POST">
                 <input type="text" name="nama" placeholder="Nama" required>
                 <input type="text" name="nomor" placeholder="Nomor Telepon" required>
                 <textarea name="alamat" placeholder="Alamat Lengkap" required></textarea>
@@ -184,7 +196,7 @@ if (isset($_POST['checkout'])) {
     <p><?php echo isset($checkout_message) ? $checkout_message : ''; ?></p>
 
     <!-- Tombol Kembali ke Menu -->
-    <a href="menu.php" class="back-button">Kembali ke Menu</a>
+    <a href="produk.php" class="back-button">Kembali ke Menu</a>
 
 </body>
 </html>
