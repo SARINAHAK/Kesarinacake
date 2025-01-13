@@ -23,15 +23,15 @@ if (isset($_POST['checkout'])) {
     $nomor = $_POST['nomor'];
     $alamat = $_POST['alamat'];
 
-    // $sql = "INSERT INTO keranjang (nama, nomor, alamat) VALUES ('$username', '$nomor', '$alamat')";
+    $sql = "INSERT INTO keranjang (nama, nomor, alamat) VALUES ('$username', '$nomor', '$alamat')";
 
-    // if($db->query($sql)) {unset($_SESSION['keranjang']); 
+    if($db->query($sql)) {unset($_SESSION['keranjang']); 
 
-    //     echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
-    // }else {
-    //     echo "checkout gagal, cek jaringan anda";
-    // }
-    // unset($_SESSION['keranjang']); 
+        echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
+    }else {
+        echo "checkout gagal, cek jaringan anda";
+    }
+    unset($_SESSION['keranjang']); 
 
     // Simulasi proses checkout
     // Di sini Anda dapat menyimpan data checkout ke dalam database jika perlu
