@@ -216,7 +216,7 @@
 
             <div class="footer-column">
                 <h3>Tentang Kami</h3>
-                <p>Website kami adalah website yang menjual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
+                <p>Website kami adalah website yang me  njual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
                 <p>kami siap melayani anda</p>
                 <p>Mungkin ada request?. Silakan ajukan request Anda. Saya siap membantu!😊</p>
             </div>
@@ -234,6 +234,26 @@
             searchBox.classList.toggle('active'); 
         }
     </script>
+
+<?php
+include 'config.php';
+
+$query = "SELECT * FROM produk";
+$result = mysqli_query($conn, $query);
+?>
+
+<h2>Daftar Produk</h2>
+<?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <div>
+        <img src="uploads/<?php echo $row['gambar_product']; ?>" alt="<?php echo $row['nama_product']; ?>" width="100">
+        <h3><?php echo $row['nama_product']; ?></h3>
+        <p>Harga: Rp <?php echo number_format($row['harga_product'], 0, ',', '.'); ?></p>
+        <p>stok: <?php echo $row['stok']; ?></p>
+        <a href="edit_produk.php?id=<?php echo $row['id']; ?>">Edit</a> | 
+        <a href="hapus_produk.php?id=<?php echo $row['id']; ?>">Hapus</a>
+    </div>
+<?php endwhile; ?>
+
 
 
 </body>

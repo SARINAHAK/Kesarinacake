@@ -1,40 +1,82 @@
 <?php
 session_start();
+include 'config.php';
 
-// Simulasi produk dari database
-$produk = [
-    ['id' => 1, 'nama' => 'Kue Ulang Tahun', 'harga' => 100000, 'gambar' => 'kue ulang tahun.jpeg'],
-    ['id' => 2, 'nama' => 'Kue Pernikahan', 'harga' => 300000, 'gambar' => 'kue pernikahan.jpeg'],
-    ['id' => 3, 'nama' => 'Brownies', 'harga' => 100000, 'gambar' => 'kue Brownies.jpeg'],
-    ['id' => 4, 'nama' => 'Kue Pernikahan Hijau', 'harga' => 300000, 'gambar' => 'kue pernikahan hijau.jpg'],
-    ['id' => 5, 'nama' => 'Kue Ulang Tahun Simple', 'harga' => 50000, 'gambar' => 'kue simple hijau.jpg'],
-    ['id' => 6, 'nama' => 'Kue Ulang Tahun Biru', 'harga' => 100000, 'gambar' => 'kue ulang tahun biru.jpg'],
-    ['id' => 7, 'nama' => 'Kue Ulang Tahun Orens', 'harga' => 50000, 'gambar' => 'kue ulang tahun orens.jpg'],
-    ['id' => 8, 'nama' => 'Kue Ulang Tahun Anak Sofia', 'harga' => 200000, 'gambar' => 'kue ultah anak sofia.jpg'],
-    ['id' => 9, 'nama' => 'Kue Ulang Tahun Spider-Man', 'harga' => 250000, 'gambar' => 'kue ultah anak spider man.jpg'],
-    ['id' => 10, 'nama' => 'Kue Ulang Tahun Bir', 'harga' => 350000, 'gambar' => 'kue ultah bir.jpg'],
-    ['id' => 11, 'nama' => 'Kue Ulang Tahun Bunga', 'harga' => 100000, 'gambar' => 'kue ultah bunga.jpg'],
-    ['id' => 12, 'nama' => 'Kue Ulang Tahun Miki Mouse', 'harga' => 250000, 'gambar' => 'kue ultah miki mouse.jpg'],
-    ['id' => 13, 'nama' => 'Kue Perayaan Komuni Pertama', 'harga' => 250000, 'gambar' => 'kue perayaan komuni pertama.jpg'],
-];
 
-// Menambahkan produk ke keranjang saat tombol ditekan
-if (isset($_POST['tambah_ke_keranjang'])) {
-    $id_produk = $_POST['id_produk'];
+if (isset($_POST['add_product'])) {
+    $nama_product = $_POST['nama_product'];
+    $harga_produk = $_POST['harga_product'];
+    $stok = $_POST['stok'];
+    $gambar_product = $_FILES['gambar_product']['name'];
+    $gambar_product_tmp = $_FILES['gambar_product']['tmp_name'];
 
-    // Cari produk berdasarkan ID
-    foreach ($produk as $item) {
-        if ($item['id'] == $id_produk) {
-            // Simpan produk ke session keranjang
-            $_SESSION['keranjang'][] = $item;
-            break;
+    // Validasi nama produk
+    if (empty($nama_product)) {
+        $message = "Nama produk tidak boleh kosong.";
+    } else { 
+        $gambar_product_folder = 'uploaded_img/' . $gambar_product;
+
+        if (move_uploaded_file($gambar_product_tmp, $gambar_product_folder)) {
+            $query = "INSERT INTO produk (nama_product, harga_product, gambar_product, stok) 
+                      VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("siss", $nama_product, $harga_produk, $gambar_product, $stok);
+
+            if ($stmt->execute()) {
+                $message = 'Produk berhasil ditambahkan!';
+            } else {
+                $message = 'Gagal menambahkan produk: ' . $stmt->error;
+            }
+        } else {
+            $message = 'Gagal mengunggah gambar!';
         }
     }
-
-    // Redirect ke halaman keranjang
-    header("Location: keranjang.php");
-    exit();
 }
+
+// ... (bagian edit produk dan lainnya)
+
+// Mengedit produk
+if (isset($_POST['edit_product'])) {
+    $id = $_POST['id'];
+    $nama_product = $_POST['nama_product'];
+    $harga_product = $_POST['harga_product'];
+    $stok = $_POST['stok_product']; 
+    $gambar_product = $_FILES['gambar_product']['name'];
+    $gambar_product_tmp = $_FILES['gambar_product']['tmp_name'];
+
+    // Cek jika ada gambar yang diupload
+    if (!empty($gambar_product)) {
+        $gambar_product_folder = 'uploaded_img/' . $gambar_product;
+        move_uploaded_file($gambar_product_tmp, $gambar_product_folder);
+        $query = "UPDATE produk SET nama_product = '$nama_product', harga_product = '$harga_product', gambar_product = '$gambar_product', stok = '$stok' WHERE id = $id"; 
+    } else {
+        $query = "UPDATE produk SET nama_product = '$nama_product', harga_product = '$harga_product', stok = '$stok' WHERE id = $id";
+    }
+
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $message = 'Produk berhasil diperbarui!';
+    } else {
+        $message = 'Gagal memperbarui produk!';
+    }
+}
+
+// Menghapus produk
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $query = "DELETE FROM produk WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $message = 'Produk berhasil dihapus!';
+    } else {
+        $message = 'Gagal menghapus produk!';
+    }
+}
+
+// Menampilkan semua produk
+$query = "SELECT * FROM produk";
+$result = mysqli_query($conn, $query);
+$produk = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -43,105 +85,175 @@ if (isset($_POST['tambah_ke_keranjang'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produk - Kesarina Cake</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ad2020;
-        }
-        .breadcrumb {
-            font-size: 14px;
-            margin: 10px 0;
-            white-space:wrap; /* Mencegah teks terputus ke baris baru */
-        }
-
-        .breadcrumb a {
-            text-decoration: none;
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: rgb(240, 223, 223);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #ad2020;
-        }
-        p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .product-item {
-            display: inline-block;
-            background-color: #fff;
-            width: 250px;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        .product-item img {
-            width: 230px;
-            height: 230px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            object-fit: cover;
-        }
-        .product-item h3 {
-            color: #333;
-            font-size: 18px;
-        }
-        .product-item p {
-            color: #e67e22;
-            font-weight: bold;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<main class="main-content">
-        <div class="breadcrumb">
-            <a href="index.php">Beranda</a> / <span>Kontak</span>
-        </div>
 <body>
-    <main>
-        <section>
-            <h2>Produk</h2>
-            <p>Berikut adalah beberapa produk kami:</p>
-            
-            <?php foreach ($produk as $item): ?>
-            <div class="product-item">
-                <img src="<?php echo $item['gambar']; ?>" alt="<?php echo $item['nama']; ?>">
-                <h3><?php echo $item['nama']; ?></h3>
-                <p>Harga: Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></p>
-                <form method="POST" action="">
-                    <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
-                    <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
-                </form>
-            </div>
-            <?php endforeach; ?>
-        </section>
-    </main>
+    <style>body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+form h3 {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Image Styling */
+td img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 8px;
+}
+
+/* Links for Actions */
+tr td a {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+tr td a:hover {
+    background-color: #0056b3;
+}
+
+/* Message Display */
+p {
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+</style>
+    <div class="container">
+        <h2>Daftar Produk</h2>
+
+        <!-- Form untuk menambahkan produk -->
+        <form method="POST" enctype="multipart/form-data">
+    <h3>Tambah Produk</h3>
+    <input type="text" name="nama_product" placeholder="Nama Produk" required>
+    <input type="number" name="harga_product" placeholder="Harga Produk" required>
+    <input type="number" name="stok" placeholder="stok" required> 
+    <input type="file" name="gambar_product" accept="image/*" required>
+    <button type="submit" name="add_product">Tambah Produk</button>
+</form>
+
+        <?php if (isset($message)) { echo "<p>$message</p>"; } ?>
+
+        <!-- Tabel untuk menampilkan produk -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Gambar</th>
+                    <th>Nama Produk</th>
+                    <th>Harga Produk</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($produk as $item): ?>
+                    <tr>
+                        <td><img src="uploaded_img/<?php echo $item['gambar_product']; ?>" width="100" height="100" alt="gambar produk"></td>
+                        <td><?php echo $item['nama_product']; ?></td>
+                        <td>Rp <?php echo number_format($item['harga_product'], 0, ',', '.'); ?></td>
+                        <td><?php echo isset($item['stok']) ? $item['stok'] : '0'; ?></td>
+
+                        <td>
+                            <a href="edit_produk.php?id=<?php echo $item['id']; ?>">Edit</a>
+                            <a href="produk.php?delete=<?php echo $item['id']; ?>">Hapus</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+
+
+
