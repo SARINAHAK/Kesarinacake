@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             height: 100vh;
         }
+        
         .form-container {
             background: white;
             padding: 40px;
@@ -55,19 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
             max-width: 400px;
         }
+
         h1 {
             margin-bottom: 15px;
             text-align: center;
             color: #333;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         label {
             display: block;
             margin-bottom: 10px;
             color: #555;
         }
+
         input {
             width: 100%;
             padding: 15px;
@@ -75,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 4px;
             font-size: 20px;
         }
+
         button {
             width: 100%;
             padding: 15px;
@@ -85,13 +91,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 4px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #ad2020;
         }
+
         .error-message {
             color: red;
             font-size: 18px;
         }
+
         p {
             text-align: center;
             margin-top: 15px;
