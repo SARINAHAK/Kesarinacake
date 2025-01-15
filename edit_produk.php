@@ -1,11 +1,11 @@
 <?php
 session_start();
-include 'config.php';
+include 'koneksi.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $query = "SELECT * FROM produk WHERE id = $id";
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($db, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $produk = mysqli_fetch_assoc($result); 
@@ -36,12 +36,12 @@ if (isset($_POST['edit_product'])) {
         $query = "UPDATE produk SET nama_product = '$nama_product', harga_product = '$harga_product', stok = '$stok' WHERE id = $id";
     }
 
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($db, $query);
 
     if ($result) {
         header("Location: admin_produk.php"); // Redirect to product list page after successful update
     } else {
-        echo "Gagal memperbarui produk: " . mysqli_error($conn); 
+        echo "Gagal memperbarui produk: " . mysqli_error($db); 
     }
 }
 

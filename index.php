@@ -222,5 +222,5 @@
         </div>
     </footer>
 
-
-<?php
+</body>
+</html>

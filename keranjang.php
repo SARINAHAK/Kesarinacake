@@ -1,4 +1,5 @@
 <?php
+<?php
 
 // Menyertakan koneksi ke database produk (config.php) dan database keranjang (database.php)
 include "config.php";  // Koneksi ke database produk
@@ -13,19 +14,24 @@ if (empty($_SESSION['keranjang'])) {
     $keranjang = $_SESSION['keranjang'];
     $keranjang_kosong = false;
 
+    // Menghitung total harga
     $totalHarga = 0;
     foreach ($keranjang as $item) {
         $totalHarga += $item['harga'];  // Pastikan ini menghitung semua harga produk dalam keranjang
     }
 }
 
-// Proses hapus item dari keranjang
+
 if (isset($_POST['hapus']) && isset($_POST['hapus_index'])) {
     $index = $_POST['hapus_index'];
     
+    // Hapus item dari session keranjang berdasarkan index
     unset($_SESSION['keranjang'][$index]);
+    
+    // Re-index array keranjang agar index tetap berurutan
     $_SESSION['keranjang'] = array_values($_SESSION['keranjang']);
     
+    // Redirect ke halaman keranjang untuk menghindari resubmission form
     header("Location: keranjang.php");
     exit;
 }
@@ -77,9 +83,17 @@ if (isset($_POST['checkout'])) {
     if ($db_checkout->query($sql)) {  // Gunakan $db_checkout untuk koneksi ke database keranjang
         unset($_SESSION['keranjang']);
         echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
-    } else {
-        echo "Checkout gagal, cek jaringan anda";
+    }else {
+        echo "checkout gagal, cek jaringan anda";
     }
+    unset($_SESSION['keranjang']); 
+
+    // Simulasi proses checkout
+    // Di sini Anda dapat menyimpan data checkout ke dalam database jika perlu
+
+    // Menampilkan pesan setelah checkout berhasil
+    $checkout_message = "Pemesanan berhasil! Anda akan segera dihubungi oleh tim kami.";
+    unset($_SESSION['keranjang']); // Kosongkan keranjang setelah pemesanan
 }
 ?>
 
@@ -155,7 +169,7 @@ if (isset($_POST['checkout'])) {
             display: inline-block;
             padding: 10px 20px;
             font-size: 18px;
-            background-color:rgb(246, 160, 150);
+            background-color: #e74c3c;
             color: white;
             border: none;
             border-radius: 5px;
@@ -208,7 +222,7 @@ if (isset($_POST['checkout'])) {
             <tr>
                 <th>Nama Menu</th>
                 <th>Harga</th>
-                <th>Aksi</th> <!-- Kolom baru untuk tombol hapus -->
+                <th>Aksi</th> Kolom baru untuk tombol hapus
             </tr>
             <?php foreach ($keranjang as $index => $item): ?>
                 <tr>

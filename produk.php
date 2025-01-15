@@ -1,10 +1,11 @@
 <?php
 session_start();
-include('config.php'); // Sertakan sambungan database
+include('koneksi.php'); // Sertakan sambungan database
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Invalid CSRF token"); 
+<<<<<<< HEAD
     }
 
     // ... (proses data formulir) ...
@@ -63,19 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang']
         }
     }
 
+=======
+    }
+>>>>>>> c49e05bd0325dbe1e19eae9bf4b8cb0f7389adb5
 
-    // ... (proses data formulir) ...
+    // ... (proses data formulir) ...
 }
 
-// Query untuk mengambil data produk dengan pencarian
-if (isset($_GET['cari']) && !empty($_GET['cari'])) {
-    $cari = $conn->real_escape_string($_GET['cari']);
-    $sql = "SELECT * FROM produk WHERE nama_product LIKE '%$cari%'";
-} else {
-    $sql = "SELECT * FROM produk";
-}
 
-$result = $conn->query($sql);
+// Query untuk mengambil data produk
+$sql = "SELECT * FROM produk";
+$result = $db->query($sql);
 
 // Periksa apakah query berhasil
 if (!$result) {
@@ -84,10 +83,14 @@ if (!$result) {
 
 // Simpan data produk dalam array
 $produk = array();
-while ($row = $result->fetch_assoc()) {
+while($row = $result->fetch_assoc()) {
     $produk[] = $row;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c49e05bd0325dbe1e19eae9bf4b8cb0f7389adb5
 }
+
 ?>
 
 <!DOCTYPE html>

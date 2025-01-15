@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include ('koneksi.php');
 
 
 if (isset($_POST['add_product'])) {
@@ -19,7 +19,7 @@ if (isset($_POST['add_product'])) {
         if (move_uploaded_file($gambar_product_tmp, $gambar_product_folder)) {
             $query = "INSERT INTO produk (nama_product, harga_product, gambar_product, stok) 
                       VALUES (?, ?, ?, ?)";
-            $stmt = $conn->prepare($query);
+            $stmt = $db->prepare($query);
             $stmt->bind_param("siss", $nama_product, $harga_produk, $gambar_product, $stok);
 
             if ($stmt->execute()) {
@@ -53,7 +53,7 @@ if (isset($_POST['edit_product'])) {
         $query = "UPDATE produk SET nama_product = '$nama_product', harga_product = '$harga_product', stok = '$stok' WHERE id = $id";
     }
 
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($db, $query);
     if ($result) {
         $message = 'Produk berhasil diperbarui!';
     } else {
@@ -65,7 +65,7 @@ if (isset($_POST['edit_product'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $query = "DELETE FROM produk WHERE id = $id";
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($db, $query);
     if ($result) {
         $message = 'Produk berhasil dihapus!';
     } else {
@@ -73,10 +73,13 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Menampilkan semua produk
-$query = "SELECT * FROM produk";
-$result = mysqli_query($conn, $query);
-$produk = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$query = "SELECT * FROM produk";  // Pastikan menggunakan $db untuk koneksi
+$result = $db->query($query);  // Gunakan $db untuk melakukan query
+if ($result) {
+    $produk = $result->fetch_all(MYSQLI_ASSOC);  // Ambil hasil query
+} else {
+    echo "Error: " . $db->error;
+}
 ?>
 
 <!DOCTYPE html>
