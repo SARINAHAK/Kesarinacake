@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 include "database.php";
 session_start();
@@ -221,5 +221,45 @@ if (isset($_POST['checkout'])) {
     <!-- Tombol Kembali ke Menu -->
     <a href="produk.php" class="back-button">Kembali ke Menu</a>
 
+</body>
+</html> -->
+
+
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja</title>
+</head>
+<body>
+    <h2>Keranjang Belanja Anda</h2>
+
+    <?php if (isset($_SESSION['keranjang']) && count($_SESSION['keranjang']) > 0): ?>
+        <table border="1">
+            <tr>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Total</th>
+            </tr>
+            <?php foreach ($_SESSION['keranjang'] as $item): ?>
+                <tr>
+                    <td><?php echo $item['nama']; ?></td>
+                    <td>Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></td>
+                    <td><?php echo $item['jumlah']; ?></td>
+                    <td>Rp <?php echo number_format($item['harga'] * $item['jumlah'], 0, ',', '.'); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <br>
+        <a href="checkout.php">Checkout</a>
+    <?php else: ?>
+        <p>Keranjang Anda kosong.</p>
+    <?php endif; ?>
 </body>
 </html>
