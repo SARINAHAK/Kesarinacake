@@ -10,52 +10,51 @@ if (empty($_SESSION['keranjang'])) {
     $keranjang = $_SESSION['keranjang'];
     $keranjang_kosong = false;
 
-    // Menghitung total harga
     $totalHarga = 0;
     foreach ($keranjang as $item) {
         $totalHarga += $item['harga'];
     }
 }
 
-
+// Proses hapus item dari keranjang
 if (isset($_POST['hapus']) && isset($_POST['hapus_index'])) {
     $index = $_POST['hapus_index'];
     
-    // Hapus item dari session keranjang berdasarkan index
     unset($_SESSION['keranjang'][$index]);
-    
-    // Re-index array keranjang agar index tetap berurutan
     $_SESSION['keranjang'] = array_values($_SESSION['keranjang']);
     
-    // Redirect ke halaman keranjang untuk menghindari resubmission form
     header("Location: keranjang.php");
     exit;
 }
 
 // Proses checkout
 if (isset($_POST['checkout'])) {
+    // Periksa apakah pembeli sudah login
+    if (!isset($_SESSION['user_id'])) {
+        // Jika belum login, arahkan ke halaman login dan tampilkan pesan
+        echo "<script>
+                alert('Silakan login atau register terlebih dahulu untuk melanjutkan checkout.');
+                window.location.href = 'login.php';
+              </script>";
+        exit;
+    }
+
+    // Jika sudah login, lanjutkan proses checkout
     $username = $_POST['nama'];
     $nomor = $_POST['nomor'];
     $alamat = $_POST['alamat'];
 
     $sql = "INSERT INTO keranjang (nama, nomor, alamat) VALUES ('$username', '$nomor', '$alamat')";
 
-    if($db->query($sql)) {unset($_SESSION['keranjang']); 
-
+    if ($db->query($sql)) {
+        unset($_SESSION['keranjang']);
         echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
-    }else {
-        echo "checkout gagal, cek jaringan anda";
+    } else {
+        echo "Checkout gagal, cek jaringan anda";
     }
-    unset($_SESSION['keranjang']); 
-
-    // Simulasi proses checkout
-    // Di sini Anda dapat menyimpan data checkout ke dalam database jika perlu
-
-    // Menampilkan pesan setelah checkout berhasil
-    $checkout_message = "Pemesanan berhasil! Anda akan segera dihubungi oleh tim kami.";
-    unset($_SESSION['keranjang']); // Kosongkan keranjang setelah pemesanan
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -129,7 +128,7 @@ if (isset($_POST['checkout'])) {
             display: inline-block;
             padding: 10px 20px;
             font-size: 18px;
-            background-color: #e74c3c;
+            background-color:rgb(246, 160, 150);
             color: white;
             border: none;
             border-radius: 5px;
