@@ -1,22 +1,22 @@
 <?php
-include 'config.php';
+include 'koneksi.php';
 
 if (isset($_POST['add_produk'])) {
     $nama = $_POST['nama_product'];
     $harga = $_POST['harga_product'];
     $gambar = $_FILES['gambar_product']['name'];
     $stok = $_POST['stok'];
-    $target_dir = "uploads/";
+    $target_dir = "uploaded_img/";
     $target_file = $target_dir . basename($_FILES["gambar_product"]["name"]);
 
     // Memindahkan file gambar ke folder uploads
     if (move_uploaded_file($_FILES["gambar_product"]["tmp_name"], $target_file)) {
         $query = "INSERT INTO produk (nama_product, harga_product, gambar_product, Stok) 
                   VALUES ('$nama', '$harga', '$gambar', '$stok')";
-        if (mysqli_query($conn, $query)) {
+        if (mysqli_query($db, $query)) {
             echo "Produk berhasil ditambahkan.";
         } else {
-            echo "Error: " . mysqli_error($conn);
+            echo "Error: " . mysqli_error($db);
         }
     } else {
         echo "Gambar gagal diupload.";

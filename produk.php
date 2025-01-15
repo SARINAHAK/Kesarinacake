@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('config.php'); // Sertakan sambungan database
+include('koneksi.php'); // Sertakan sambungan database
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Query untuk mengambil data produk
 $sql = "SELECT * FROM produk";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 
 // Periksa apakah query berhasil
 if (!$result) {
