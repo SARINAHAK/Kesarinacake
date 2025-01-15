@@ -39,7 +39,7 @@ if (isset($_POST['edit_product'])) {
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        header("Location: produk.php"); // Redirect to product list page after successful update
+        header("Location: admin_produk.php"); // Redirect to product list page after successful update
     } else {
         echo "Gagal memperbarui produk: " . mysqli_error($conn); 
     }
