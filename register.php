@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmPassword = $_POST['confirmPassword'];
 
     if ($password !== $confirmPassword) {
-        echo json_encode(['error' => 'Password dan konfirmasi password tidak cocok!']);
+        echo "Password dan konfirmasi password tidak cocok!";
         exit();
     }
 
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        echo json_encode(['error' => 'Email atau Username sudah terdaftar!']);
+        echo "Email atau Username sudah terdaftar!";
         exit();
     }
 
@@ -28,17 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('sss', $username, $email, $hashed_password);
 
     if ($stmt->execute()) {
-        echo json_encode(['success' => 'Akun berhasil dibuat!']);
+        header("Location: index.php");
+        exit();
     } else {
-        echo json_encode(['error' => 'Error: ' . $stmt->error]);
+        echo "Error: " . $stmt->error;
     }
 
     $stmt->close();
 }
 ?>
 
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,12 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            height: 100%;
         }
         .form-container {
             background: white;
-            padding: 40px;
+            padding: 50px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 100%;
@@ -94,93 +95,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
         }
         button:hover {
-            background-color: #9c1f1f;
+            background-color: #ad2020;
         }
         p {
             text-align: center;
             margin-top: 20px;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h1>Daftar Akun</h1>
-        <form id="registerForm">
+        <form method="POST" action="register.php">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Masukkan username" required>
-                <div id="usernameError" class="error"></div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
-                <div id="emailError" class="error"></div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Masukkan password" required>
-                <div id="passwordError" class="error"></div>
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Konfirmasi Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Masukkan ulang password" required>
-                <div id="confirmPasswordError" class="error"></div>
             </div>
             <button type="submit">Daftar</button>
         </form>
         <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
     </div>
-
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();  // Mencegah form untuk dikirimkan secara default
-
-            // Reset previous error messages
-            let isValid = true;
-            document.querySelectorAll('.error').forEach(error => error.textContent = '');
-
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            // Validasi password
-            if (password !== confirmPassword) {
-                alert("Password dan konfirmasi password tidak cocok!");
-                return;
-            }
-
-            // Mengirim form menggunakan AJAX
-            const formData = new FormData();
-            formData.append('username', username);
-            formData.append('email', email);
-            formData.append('password', password);
-            formData.append('confirmPassword', confirmPassword);
-
-            fetch('register.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);  // Menampilkan pesan error
-                    document.getElementById('registerForm').reset();  // Reset form setelah klik OK pada alert
-                } else if (data.success) {
-                    alert(data.success);  // Menampilkan pesan sukses
-                    document.getElementById('registerForm').reset();  // Reset form setelah klik OK pada alert
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan pada server!');
-            });
-        });
-    </script>
 </body>
 </html>

@@ -117,59 +117,40 @@
             margin-top: 20px;
         }
 
-       .search-box {
+        .search-box {
             display: none; 
             margin-right: 10px; 
             background-color: white;
-            padding: 5px;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            opacity: 0;
-            transform: scale(0.8);
-            align-items: center;
-            height: 32px;
-        }
-
-        .search-box.active {
-            display: flex;
-            opacity: 1;
-            transform: scale(1);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-box input {
-            width: 150px;
-            height: 100%; 
+            width: 200px;
             padding: 5px;
-            border: 1px solid #ad2020;
-            border-radius: 20px;
-            outline: none;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        .search-box input:focus {
-            border-color: #ff5c5c;
-            box-shadow: 0 0 8px rgba(255, 92, 92, 0.5);
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         .search-box button {
             background-color: #ad2020;
             color: white;
             border: none;
-            border-radius: 20px;
-            padding: 5px 8px;
+            border-radius: 4px;
+            padding: 6px 12px;
             cursor: pointer;
-            margin-left: 5px;
-            height: 100%;
-            font-size: 12px;
-            transition: background-color 0.3s;
         }
 
         .search-box button:hover {
-            background-color: #ff5c5c;
+            background-color: #ad2020;
         }
+
+        .search-box.active {
+            display: block;
+        }
+
+
     </style>
 </head>
 
@@ -203,6 +184,7 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero" id="beranda">
         <div class="hero-overlay">
             <h1>Selamat Datang di Kesarina Cake</h1>
@@ -234,7 +216,7 @@
 
             <div class="footer-column">
                 <h3>Tentang Kami</h3>
-                <p>Website kami adalah website yang menjual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
+                <p>Website kami adalah website yang me  njual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
                 <p>kami siap melayani anda</p>
                 <p>Mungkin ada request?. Silakan ajukan request Anda. Saya siap membantu!😊</p>
             </div>
@@ -253,6 +235,24 @@
         }
     </script>
 
+<?php
+include 'config.php';
+
+$query = "SELECT * FROM produk";
+$result = mysqli_query($conn, $query);
+?>
+
+<h2>Daftar Produk</h2>
+<?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <div>
+        <img src="uploads/<?php echo $row['gambar_product']; ?>" alt="<?php echo $row['nama_product']; ?>" width="100">
+        <h3><?php echo $row['nama_product']; ?></h3>
+        <p>Harga: Rp <?php echo number_format($row['harga_product'], 0, ',', '.'); ?></p>
+        <p>stok: <?php echo $row['stok']; ?></p>
+        <a href="edit_produk.php?id=<?php echo $row['id']; ?>">Edit</a> | 
+        <a href="hapus_produk.php?id=<?php echo $row['id']; ?>">Hapus</a>
+    </div>
+<?php endwhile; ?>
 
 </body>
 </html>
