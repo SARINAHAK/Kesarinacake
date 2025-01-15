@@ -2,10 +2,67 @@
 session_start();
 include('config.php'); // Sertakan sambungan database
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("Invalid CSRF token"); 
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+//         die("Invalid CSRF token"); 
+//     }
+
+//     // ... (proses data formulir) ...
+// }
+
+
+// // Query untuk mengambil data produk
+// $sql = "SELECT * FROM produk";
+// $result = $conn->query($sql);
+
+// // Periksa apakah query berhasil
+// if (!$result) {
+//     die("Error: " . $conn->error);
+// }
+
+// // Simpan data produk dalam array
+// $produk = array();
+// while($row = $result->fetch_assoc()) {
+//     $produk[] = $row;
+// }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang'])) {
+    $id_produk = $_POST['id_produk'];
+
+    // Cari produk berdasarkan ID
+    foreach ($produk as $item) {
+        if ($item['id'] == $id_produk) {
+            // Jika keranjang belum ada di session, buat keranjang kosong
+            if (!isset($_SESSION['keranjang'])) {
+                $_SESSION['keranjang'] = [];
+            }
+
+            // Periksa apakah produk sudah ada di keranjang
+            $sudah_ada = false;
+            foreach ($_SESSION['keranjang'] as &$produk_keranjang) {
+                if ($produk_keranjang['id'] == $id_produk) {
+                    $produk_keranjang['jumlah'] += 1; // Tambahkan jumlah produk
+                    $sudah_ada = true;
+                    break;
+                }
+            }
+
+            // Jika produk belum ada di keranjang, tambahkan sebagai item baru
+            if (!$sudah_ada) {
+                $_SESSION['keranjang'][] = [
+                    'id' => $item['id'],
+                    'nama' => $item['nama_product'],
+                    'harga' => $item['harga_product'],
+                    'jumlah' => 1
+                ];
+            }
+
+            echo "<script>alert('Produk berhasil ditambahkan ke keranjang!');</script>";
+            break;
+        }
     }
+<<<<<<< HEAD
 
     // ... (proses data formulir) ...
 }
@@ -29,6 +86,8 @@ if (!$result) {
 $produk = array();
 while ($row = $result->fetch_assoc()) {
     $produk[] = $row;
+=======
+>>>>>>> c9c013514775c74d777372cd51ac9c838a5d49f7
 }
 ?>
 

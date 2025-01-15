@@ -211,7 +211,7 @@
 
             <div class="footer-column">
                 <h3>Tentang Kami</h3>
-                <p>Website kami adalah website yang me  njual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
+                <p>Website kami adalah website yang menjual kue perayaan "seperti: kue ulang tahun,pernikahan,komuni pertama" </p>
                 <p>kami siap melayani anda</p>
                 <p>Mungkin ada request?. Silakan ajukan request Anda. Saya siap membantu!😊</p>
             </div>
