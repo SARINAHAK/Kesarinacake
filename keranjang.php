@@ -1,9 +1,8 @@
 <?php
-<?php
 
 // Menyertakan koneksi ke database produk (config.php) dan database keranjang (database.php)
-include "config.php";  // Koneksi ke database produk
-include "database.php"; // Koneksi ke database keranjang
+include "koneksi.php";  // Koneksi ke database produk
+
 
 session_start();
 

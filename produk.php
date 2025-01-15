@@ -4,17 +4,14 @@ include('koneksi.php'); // Sertakan sambungan database
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("Invalid CSRF token"); 
-<<<<<<< HEAD
+        die("Invalid CSRF token");
     }
-
-    // ... (proses data formulir) ...
 }
 
 
 // Query untuk mengambil data produk
 $sql = "SELECT * FROM produk";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 
 // Periksa apakah query berhasil
 if (!$result) {
@@ -64,13 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang']
         }
     }
 
-=======
     }
->>>>>>> c49e05bd0325dbe1e19eae9bf4b8cb0f7389adb5
-
-    // ... (proses data formulir) ...
-}
-
 
 // Query untuk mengambil data produk
 $sql = "SELECT * FROM produk";
@@ -85,10 +76,6 @@ if (!$result) {
 $produk = array();
 while($row = $result->fetch_assoc()) {
     $produk[] = $row;
-<<<<<<< HEAD
-
-=======
->>>>>>> c49e05bd0325dbe1e19eae9bf4b8cb0f7389adb5
 }
 
 ?>
@@ -111,8 +98,8 @@ while($row = $result->fetch_assoc()) {
             justify-content: center;
             text-align: center;
             color: #333; /* Warna teks menjadi abu-abu */
-            background-color:rgb(247, 216, 216);
-            magin-bottom: 20px
+            background-color: transparent;
+            margin-bottom: 20px
         }
         .h2 {
             font-size: 20px;
@@ -134,6 +121,8 @@ while($row = $result->fetch_assoc()) {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: relative; /* Untuk memposisikan gambar secara absolut */
+            padding: 20px;
+            background-color: #ffff;
         }
         
         .product-item:hover {
