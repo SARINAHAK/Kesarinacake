@@ -182,7 +182,7 @@ if (isset($_POST['checkout'])) {
             <tr>
                 <th>Nama Menu</th>
                 <th>Harga</th>
-                <th>Aksi</th> <!-- Kolom baru untuk tombol hapus -->
+                <th>Aksi</th> Kolom baru untuk tombol hapus
             </tr>
             <?php foreach ($keranjang as $index => $item): ?>
                 <tr>
@@ -223,4 +223,4 @@ if (isset($_POST['checkout'])) {
     <a href="produk.php" class="back-button">Kembali ke Menu</a>
 
 </body>
-</html>
+</html> 

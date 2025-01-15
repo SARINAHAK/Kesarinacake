@@ -2,7 +2,7 @@
 $host = "localhost";
 $username = "root";  // ganti dengan username database Anda
 $password = "";  // ganti dengan password database Anda
-$dbname = "kesarinacake";  // ganti dengan nama database Anda
+$dbname = "kesarina_cake";  // ganti dengan nama database Anda
 
 // Membuat koneksi
 $conn = mysqli_connect($host, $username, $password, $dbname);
