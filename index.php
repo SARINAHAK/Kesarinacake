@@ -169,11 +169,6 @@
                     <button type="submit">Cari</button>
                 </form>
             </div>
-
-                <a href="javascript:void(0);" class="cari" onclick="toggleSearchBox()">
-                    <img src="https://www.freeiconspng.com/uploads/search-icon-png-0.png" alt="Cari" class="icon">
-                </a>
-
                 <a href="keranjang.php" class="Keranjang">
                     <img src="https://purepng.com/public/uploads/medium/purepng.com-shopping-cartshoppingcarttrolleycarriagebuggysupermarkets-1421526532325wtdqo.png" alt="Keranjang" class="icon">
                 </a>
@@ -228,33 +223,4 @@
     </footer>
 
 
-    <script>
-        function toggleSearchBox() {
-            var searchBox = document.getElementById('searchBox');
-            searchBox.classList.toggle('active'); 
-        }
-    </script>
-
 <?php
-include 'config.php';
-
-$query = "SELECT * FROM produk";
-$result = mysqli_query($conn, $query);
-?>
-
-<h2>Daftar Produk</h2>
-<?php while ($row = mysqli_fetch_assoc($result)): ?>
-    <div>
-        <img src="uploads/<?php echo $row['gambar_product']; ?>" alt="<?php echo $row['nama_product']; ?>" width="100">
-        <h3><?php echo $row['nama_product']; ?></h3>
-        <p>Harga: Rp <?php echo number_format($row['harga_product'], 0, ',', '.'); ?></p>
-        <p>stok: <?php echo $row['stok']; ?></p>
-        <a href="edit_produk.php?id=<?php echo $row['id']; ?>">Edit</a> | 
-        <a href="hapus_produk.php?id=<?php echo $row['id']; ?>">Hapus</a>
-    </div>
-<?php endwhile; ?>
-
-
-
-</body>
-</html>
