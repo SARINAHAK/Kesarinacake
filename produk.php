@@ -46,29 +46,34 @@ while($row = $result->fetch_assoc()) {
             justify-content: center;
             text-align: center;
             color: #333; /* Warna teks menjadi abu-abu */
-            background-color:rgb(136, 43, 43);
+            background-color:rgb(247, 216, 216);
             magin-bottom: 20px
         }
         .h2 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
-            color: #3498db; /* Ubah warna judul menjadi biru */
+            color:black(104, 112, 39); /* Ubah warna judul menjadi biru */
             margin-bottom: 20px;
             text-align: center;
         }
 
         .p {
-            font-size: 16px;
+            font-size: 10px;
         }
 
         .product-item {
-            width: 300px;
+            width: 200px;
             margin: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: relative; /* Untuk memposisikan gambar secara absolut */
+        }
+        
+        .product-item:hover {
+            transform: translateY(-5px); /* Elevate the card slightly on hover */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
         }
 
         .product-item img {
@@ -84,12 +89,12 @@ while($row = $result->fetch_assoc()) {
         }
 
         .product-item h3 {
-            font-size: 18px;
+            font-size: 15px;
             margin-bottom: 10px;
         }
 
         .product-item p {
-            color: #666;
+            color: black;
             margin-bottom: 15px;
         }
 
@@ -101,6 +106,28 @@ while($row = $result->fetch_assoc()) {
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* Tambahan untuk form pencarian */
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -109,8 +136,21 @@ while($row = $result->fetch_assoc()) {
             <a href="index.php">Beranda</a> / <span>Produk</span> 
         </div>
 
+        <!-- Form Pencarian Produk - Ditambahkan -->
+        <form method="GET" action="" class="search-form">
+            <input type="text" name="cari" placeholder="Cari nama kue..." 
+                   value="<?php echo isset($_GET['cari']) ? htmlspecialchars($_GET['cari']) : ''; ?>">
+            <button type="submit">Cari</button>
+        </form>
+
+        <div class="h2">
         <h2>Produk</h2>
         <p>Berikut adalah beberapa produk kami:</p>
+
+        <!-- Menampilkan Pesan Jika Tidak Ada Produk -->
+        <?php if (count($produk) === 0): ?>
+            <p style="text-align: center; color: red;">Produk tidak ditemukan.</p>
+        <?php endif; ?>
 
         <div class="product-container">
             <?php foreach ($produk as $item): ?>

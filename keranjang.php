@@ -172,7 +172,7 @@ if (isset($_POST['checkout'])) {
 
     </style>
 </head>
-<body>
+<body> -->
     <h1>Keranjang Belanja</h1>
 
     <?php if ($keranjang_kosong): ?>
