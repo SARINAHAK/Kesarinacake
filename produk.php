@@ -2,29 +2,29 @@
 session_start();
 include('config.php'); // Sertakan sambungan database
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-//         die("Invalid CSRF token"); 
-//     }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Invalid CSRF token"); 
+    }
 
-//     // ... (proses data formulir) ...
-// }
+    // ... (proses data formulir) ...
+}
 
 
-// // Query untuk mengambil data produk
-// $sql = "SELECT * FROM produk";
-// $result = $conn->query($sql);
+// Query untuk mengambil data produk
+$sql = "SELECT * FROM produk";
+$result = $conn->query($sql);
 
-// // Periksa apakah query berhasil
-// if (!$result) {
-//     die("Error: " . $conn->error);
-// }
+// Periksa apakah query berhasil
+if (!$result) {
+    die("Error: " . $conn->error);
+}
 
-// // Simpan data produk dalam array
-// $produk = array();
-// while($row = $result->fetch_assoc()) {
-//     $produk[] = $row;
-// }
+// Simpan data produk dalam array
+$produk = array();
+while($row = $result->fetch_assoc()) {
+    $produk[] = $row;
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang'])) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang']
             break;
         }
     }
-<<<<<<< HEAD
+
 
     // ... (proses data formulir) ...
 }
@@ -86,8 +86,7 @@ if (!$result) {
 $produk = array();
 while ($row = $result->fetch_assoc()) {
     $produk[] = $row;
-=======
->>>>>>> c9c013514775c74d777372cd51ac9c838a5d49f7
+
 }
 ?>
 
@@ -221,8 +220,10 @@ while ($row = $result->fetch_assoc()) {
                     <img src="uploaded_img/<?php echo $item['gambar_product']; ?>" alt="<?php echo $item['nama_product']; ?>">
                     <h3><?php echo $item['nama_product']; ?></h3>
                     <p>Harga: Rp <?php echo number_format($item['harga_product'], 0, ',', '.'); ?></p>
-                    <form method="POST" action="">
+                    <form method="POST" action="keranjang.php">
                         <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
+                        <input type="hidden" name="nama_produk" value="<?php echo $item['nama_product']; ?>">
+                        <input type="hidden" name="Harga_produk" value="<?php echo $item['harga_product']; ?>">
                         <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
                     </form>
                 </div>

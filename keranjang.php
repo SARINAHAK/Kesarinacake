@@ -1,6 +1,9 @@
-<!-- <?php
+<?php
 
-include "database.php";
+// Menyertakan koneksi ke database produk (config.php) dan database keranjang (database.php)
+include "config.php";  // Koneksi ke database produk
+include "database.php"; // Koneksi ke database keranjang
+
 session_start();
 
 // Jika keranjang kosong
@@ -12,7 +15,7 @@ if (empty($_SESSION['keranjang'])) {
 
     $totalHarga = 0;
     foreach ($keranjang as $item) {
-        $totalHarga += $item['harga'];
+        $totalHarga += $item['harga'];  // Pastikan ini menghitung semua harga produk dalam keranjang
     }
 }
 
@@ -27,7 +30,31 @@ if (isset($_POST['hapus']) && isset($_POST['hapus_index'])) {
     exit;
 }
 
-// Proses checkout
+// Proses tambah ke keranjang
+if (isset($_POST['tambah_ke_keranjang'])) { // Langkah 2: Proses tambah ke keranjang
+    $id_produk = $_POST['id_produk'];
+    $nama_produk = $_POST['nama_produk'];
+    $harga_produk = $_POST['harga_product'];
+
+    // Buat array produk
+    $produk_baru = [
+        'id' => $id_produk,
+        'nama' => $nama_produk,
+        'harga' => $harga_product,
+    ];
+
+    // Tambahkan produk ke keranjang (session)
+    if (!isset($_SESSION['keranjang'])) {
+        $_SESSION['keranjang'] = [];
+    }
+    $_SESSION['keranjang'][] = $produk_baru;
+
+    // Redirect ke halaman keranjang untuk mencegah resubmission form
+    header("Location: keranjang.php");
+    exit;
+}
+
+// Jika sudah login, lanjutkan proses checkout
 if (isset($_POST['checkout'])) {
     // Periksa apakah pembeli sudah login
     if (!isset($_SESSION['user_id'])) {
@@ -44,9 +71,10 @@ if (isset($_POST['checkout'])) {
     $nomor = $_POST['nomor'];
     $alamat = $_POST['alamat'];
 
+    // Menyimpan data ke database keranjang (tabel keranjang)
     $sql = "INSERT INTO keranjang (nama, nomor, alamat) VALUES ('$username', '$nomor', '$alamat')";
 
-    if ($db->query($sql)) {
+    if ($db_checkout->query($sql)) {  // Gunakan $db_checkout untuk koneksi ke database keranjang
         unset($_SESSION['keranjang']);
         echo "Pemesanan berhasil! Keranjang anda sekarang kosong";
     } else {
@@ -54,7 +82,6 @@ if (isset($_POST['checkout'])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="id">
@@ -171,7 +198,7 @@ if (isset($_POST['checkout'])) {
 
     </style>
 </head>
-<body> -->
+<body>
     <h1>Keranjang Belanja</h1>
 
     <?php if ($keranjang_kosong): ?>
@@ -197,9 +224,9 @@ if (isset($_POST['checkout'])) {
                 </tr>
             <?php endforeach; ?>
             <tr>
-                <td class="total">Total Harga</td>
-                <td class="total">Rp <?php echo number_format($totalHarga, 0, ',', '.'); ?></td>
-                <td></td>
+                 <td class="total">Total Harga</td>
+                 <td>Rp <?php echo number_format($totalHarga, 0, ',', '.'); ?></td>
+                 <td></td>
             </tr>
         </table>
     <?php endif; ?>
@@ -221,45 +248,5 @@ if (isset($_POST['checkout'])) {
     <!-- Tombol Kembali ke Menu -->
     <a href="produk.php" class="back-button">Kembali ke Menu</a>
 
-</body>
-</html> -->
-
-
-<?php
-session_start();
-?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keranjang Belanja</title>
-</head>
-<body>
-    <h2>Keranjang Belanja Anda</h2>
-
-    <?php if (isset($_SESSION['keranjang']) && count($_SESSION['keranjang']) > 0): ?>
-        <table border="1">
-            <tr>
-                <th>Nama Produk</th>
-                <th>Harga</th>
-                <th>Jumlah</th>
-                <th>Total</th>
-            </tr>
-            <?php foreach ($_SESSION['keranjang'] as $item): ?>
-                <tr>
-                    <td><?php echo $item['nama']; ?></td>
-                    <td>Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></td>
-                    <td><?php echo $item['jumlah']; ?></td>
-                    <td>Rp <?php echo number_format($item['harga'] * $item['jumlah'], 0, ',', '.'); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-        <br>
-        <a href="checkout.php">Checkout</a>
-    <?php else: ?>
-        <p>Keranjang Anda kosong.</p>
-    <?php endif; ?>
 </body>
 </html>
