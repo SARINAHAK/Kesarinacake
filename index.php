@@ -129,18 +129,18 @@
             opacity: 0;
             transform: scale(0.8);
             align-items: center;
-            height: 32px; /* Tinggi menyesuaikan ikon */
+            height: 32px;
         }
 
         .search-box.active {
-            display: flex; /* Ubah menjadi fleksibel untuk rata tengah */
+            display: flex;
             opacity: 1;
             transform: scale(1);
         }
 
         .search-box input {
-            width: 150px; /* Lebar menyesuaikan */
-            height: 100%; /* Sesuaikan tinggi */
+            width: 150px;
+            height: 100%; 
             padding: 5px;
             border: 1px solid #ad2020;
             border-radius: 20px;
@@ -159,11 +159,11 @@
             color: white;
             border: none;
             border-radius: 20px;
-            padding: 5px 8px; /* Menyesuaikan dengan tinggi ikon */
+            padding: 5px 8px;
             cursor: pointer;
             margin-left: 5px;
-            height: 100%; /* Sesuaikan tinggi */
-            font-size: 12px; /* Sesuaikan font */
+            height: 100%;
+            font-size: 12px;
             transition: background-color 0.3s;
         }
 
