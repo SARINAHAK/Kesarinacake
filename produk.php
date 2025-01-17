@@ -2,6 +2,11 @@
 session_start();
 include('koneksi.php'); 
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Invalid CSRF token");
@@ -70,7 +75,7 @@ if (!$result) {
     die("Error: " . $conn->error);
 }
 
-// Simpan data produk dalam array
+
 $produk = array();
 while($row = $result->fetch_assoc()) {
     $produk[] = $row;
@@ -159,7 +164,7 @@ while($row = $result->fetch_assoc()) {
             cursor: pointer;
         }
 
-        /* Tambahan untuk form pencarian */
+        
         .search-form {
             text-align: center;
             margin-bottom: 20px;
@@ -211,6 +216,7 @@ while($row = $result->fetch_assoc()) {
 
                     <?php if ($item['stok'] > 0): ?>
                         <form method="POST" action="">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
                             <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
                         </form>
