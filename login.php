@@ -132,8 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit">Login</button>
         </form>
-
-
         <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
         <p class="error-message"><?php echo $error_message; ?></p>
     </div>
