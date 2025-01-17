@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('koneksi.php');
+include('koneksi.php'); // Pastikan koneksi database sudah benar
 
 $error_message = "";
 
@@ -8,6 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    // Cek apakah login untuk admin menggunakan email dan password khusus
+    if ($email === 'kesarinacake@gmail.com' && $password === 'admin123') {
+        $_SESSION['user_id'] = 0;  // ID admin, bisa diatur sesuai kebutuhan
+        $_SESSION['email'] = $email;
+        header("Location: admin_produk.php");  // Redirect ke halaman admin
+        exit();
+    }
+
+    // Jika bukan admin, periksa email di database
     $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ?");
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -16,10 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         
+        // Verifikasi password
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
-            header("Location: index.php");
+            header("Location: index.php");  // Redirect ke halaman utama pengguna
             exit();
         } else {
             $error_message = "Password salah!";
@@ -29,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,19 +121,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="form-container">
         <h1>Login</h1>
-        <form method="POST" action="login.php">
+        <form method="POST" action="login.php" autocomplete="off">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Masukkan email anda" required>
+                <input type="email" id="email" name="email" placeholder="Masukkan email anda" required autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Masukkan password anda" required>
+                <input type="password" id="password" name="password" placeholder="Masukkan password" required autocomplete="off">
             </div>
             <button type="submit">Login</button>
         </form>
+
+
         <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
-        <p><?php echo $error_message; ?></p>
+        <p class="error-message"><?php echo $error_message; ?></p>
     </div>
 </body>
 </html>

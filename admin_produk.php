@@ -2,6 +2,12 @@
 session_start();
 include ('koneksi.php');
 
+if ($_SESSION['user_id'] != 0) {
+    // Jika bukan admin, redirect ke halaman login
+    header("Location: login.php");
+    exit();
+}
+
 
 if (isset($_POST['add_product'])) {
     $nama_product = $_POST['nama_product'];
