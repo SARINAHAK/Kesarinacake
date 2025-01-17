@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('koneksi.php'); // Sertakan sambungan database
+include('koneksi.php'); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-// Query untuk mengambil data produk
+
 $sql = "SELECT * FROM produk";
 $result = $db->query($sql);
 
-// Periksa apakah query berhasil
+
 if (!$result) {
     die("Error: " . $conn->error);
 }
@@ -60,14 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang']
             break;
         }
     }
+}
 
-    }
 
-// Query untuk mengambil data produk
 $sql = "SELECT * FROM produk";
 $result = $db->query($sql);
 
-// Periksa apakah query berhasil
 if (!$result) {
     die("Error: " . $conn->error);
 }
@@ -186,22 +184,19 @@ while($row = $result->fetch_assoc()) {
 </head>
 <body>
     <main>
-        <div class="breadcrumb">
-            <a href="index.php">Beranda</a> / <span>Produk</span> 
+    <div class="breadcrumb">
+            <a href="index.php">Beranda</a> / <span>Produk</span>
         </div>
 
-        <!-- Form Pencarian Produk - Ditambahkan -->
         <form method="GET" action="" class="search-form">
-            <input type="text" name="cari" placeholder="Cari nama kue..." 
+            <input type="text" name="cari" placeholder="Cari nama kue..."
                    value="<?php echo isset($_GET['cari']) ? htmlspecialchars($_GET['cari']) : ''; ?>">
             <button type="submit">Cari</button>
         </form>
-
         <div class="h2">
         <h2>Produk</h2>
         <p>Berikut adalah beberapa produk kami:</p>
-
-        <!-- Menampilkan Pesan Jika Tidak Ada Produk -->
+        </h2>
         <?php if (count($produk) === 0): ?>
             <p style="text-align: center; color: red;">Produk tidak ditemukan.</p>
         <?php endif; ?>
@@ -212,12 +207,16 @@ while($row = $result->fetch_assoc()) {
                     <img src="uploaded_img/<?php echo $item['gambar_product']; ?>" alt="<?php echo $item['nama_product']; ?>">
                     <h3><?php echo $item['nama_product']; ?></h3>
                     <p>Harga: Rp <?php echo number_format($item['harga_product'], 0, ',', '.'); ?></p>
-                    <form method="POST" action="keranjang.php">
-                        <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
-                        <input type="hidden" name="nama_produk" value="<?php echo $item['nama_product']; ?>">
-                        <input type="hidden" name="Harga_produk" value="<?php echo $item['harga_product']; ?>">
-                        <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
-                    </form>
+                    <p>Stok: <?php echo $item['stok'] > 0 ? $item['stok'] : 'Habis'; ?></p>
+
+                    <?php if ($item['stok'] > 0): ?>
+                        <form method="POST" action="">
+                            <input type="hidden" name="id_produk" value="<?php echo $item['id']; ?>">
+                            <button type="submit" name="tambah_ke_keranjang">Tambah ke Keranjang</button>
+                        </form>
+                    <?php else: ?>
+                        <button disabled style="background-color: #ccc; cursor: not-allowed;">Stok Habis</button>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
