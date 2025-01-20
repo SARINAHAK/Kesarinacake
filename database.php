@@ -12,5 +12,4 @@ if($db->connect_error) {
     die("error");
 }
 
-
 ?>

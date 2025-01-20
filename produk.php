@@ -13,17 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
-
 $sql = "SELECT * FROM produk";
 $result = $db->query($sql);
-
 
 if (!$result) {
     die("Error: " . $conn->error);
 }
 
-// Simpan data produk dalam array
 $produk = array();
 while($row = $result->fetch_assoc()) {
     $produk[] = $row;
@@ -33,25 +29,21 @@ while($row = $result->fetch_assoc()) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah_ke_keranjang'])) {
     $id_produk = $_POST['id_produk'];
 
-    // Cari produk berdasarkan ID
     foreach ($produk as $item) {
         if ($item['id'] == $id_produk) {
-            // Jika keranjang belum ada di session, buat keranjang kosong
             if (!isset($_SESSION['keranjang'])) {
                 $_SESSION['keranjang'] = [];
             }
 
-            // Periksa apakah produk sudah ada di keranjang
             $sudah_ada = false;
             foreach ($_SESSION['keranjang'] as &$produk_keranjang) {
                 if ($produk_keranjang['id'] == $id_produk) {
-                    $produk_keranjang['jumlah'] += 1; // Tambahkan jumlah produk
+                    $produk_keranjang['jumlah'] += 1; 
                     $sudah_ada = true;
                     break;
                 }
             }
 
-            // Jika produk belum ada di keranjang, tambahkan sebagai item baru
             if (!$sudah_ada) {
                 $_SESSION['keranjang'][] = [
                     'id' => $item['id'],
@@ -100,14 +92,14 @@ while($row = $result->fetch_assoc()) {
             flex-wrap: wrap;
             justify-content: center;
             text-align: center;
-            color: #333; /* Warna teks menjadi abu-abu */
+            color: #333; 
             background-color: transparent;
             margin-bottom: 20px
         }
         .h2 {
             font-size: 20px;
             font-weight: bold;
-            color:black(104, 112, 39); /* Ubah warna judul menjadi biru */
+            color:black(104, 112, 39); 
             margin-bottom: 20px;
             text-align: center;
         }
@@ -123,14 +115,14 @@ while($row = $result->fetch_assoc()) {
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: relative; /* Untuk memposisikan gambar secara absolut */
+            position: relative;
             padding: 20px;
             background-color: #ffff;
         }
         
         .product-item:hover {
-            transform: translateY(-5px); /* Elevate the card slightly on hover */
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); 
         }
 
         .product-item img {

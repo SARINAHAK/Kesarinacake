@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('koneksi.php'); // Pastikan koneksi database sudah benar
+include('koneksi.php'); 
 
 $error_message = "";
 
@@ -8,15 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Cek apakah login untuk admin menggunakan email dan password khusus
     if ($email === 'kesarinacake@gmail.com' && $password === 'admin123') {
-        $_SESSION['user_id'] = 0;  // ID admin, bisa diatur sesuai kebutuhan
+        $_SESSION['user_id'] = 0; 
         $_SESSION['email'] = $email;
-        header("Location: admin_produk.php");  // Redirect ke halaman admin
+        header("Location: admin_produk.php"); 
         exit();
     }
 
-    // Jika bukan admin, periksa email di database
     $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ?");
     $stmt->bind_param('s', $email);
     $stmt->execute();
@@ -24,12 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        
-        // Verifikasi password
+
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
-            header("Location: index.php");  // Redirect ke halaman utama pengguna
+            header("Location: index.php"); 
             exit();
         } else {
             $error_message = "Password salah!";

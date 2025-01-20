@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontak - Kesarina Cake</title>
     <style>
-        /* Gaya untuk formulir kontak */
-        
-
         .form-group {
             display: flex;
             flex-direction: column;
@@ -49,8 +46,6 @@
             <a href="index.php">Beranda</a> / <span>Kontak</span>
         </div>
         <h2>Kontak</h2>
-
-        <!-- Form Kontak -->
         <form method="POST" action="">
             <div class="form-group">
                 <input  type="text" name="nama" placeholder="Nama" required>
@@ -64,19 +59,12 @@
     </main>
 
     <?php
-    // Kode PHP untuk menangani form
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nama = htmlspecialchars($_POST['nama']);
         $email = htmlspecialchars($_POST['email']);
         $pesan = htmlspecialchars($_POST['pesan']);
-
-        // Format pesan untuk WhatsApp
         $whatsapp_message = "Halo, saya ingin bertanya mengenai produk Kesarina Cake. Nama: $nama  Email: $email Pesan: $pesan";
-
-        // Nomor WhatsApp tujuan (ganti dengan nomor Anda)
         $whatsapp_number = "6282339782015";
-
-        // Redirect ke WhatsApp
         echo "<script>
                 window.location.href = 'https://wa.me/$whatsapp_number?text=" . urlencode($whatsapp_message) . "';
               </script>";

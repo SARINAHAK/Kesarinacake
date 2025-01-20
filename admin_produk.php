@@ -3,7 +3,6 @@ session_start();
 include ('koneksi.php');
 
 if ($_SESSION['user_id'] != 0) {
-    // Jika bukan admin, redirect ke halaman login
     header("Location: login.php");
     exit();
 }
@@ -16,7 +15,6 @@ if (isset($_POST['add_product'])) {
     $gambar_product = $_FILES['gambar_product']['name'];
     $gambar_product_tmp = $_FILES['gambar_product']['tmp_name'];
 
-    // Validasi nama produk
     if (empty($nama_product)) {
         $message = "Nama produk tidak boleh kosong.";
     } else { 
@@ -39,9 +37,6 @@ if (isset($_POST['add_product'])) {
     }
 }
 
-// ... (bagian edit produk dan lainnya)
-
-// Mengedit produk
 if (isset($_POST['edit_product'])) {
     $id = $_POST['id'];
     $nama_product = $_POST['nama_product'];
@@ -50,7 +45,6 @@ if (isset($_POST['edit_product'])) {
     $gambar_product = $_FILES['gambar_product']['name'];
     $gambar_product_tmp = $_FILES['gambar_product']['tmp_name'];
 
-    // Cek jika ada gambar yang diupload
     if (!empty($gambar_product)) {
         $gambar_product_folder = 'uploaded_img/' . $gambar_product;
         move_uploaded_file($gambar_product_tmp, $gambar_product_folder);
@@ -67,7 +61,6 @@ if (isset($_POST['edit_product'])) {
     }
 }
 
-// Menghapus produk
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $query = "DELETE FROM produk WHERE id = $id";
@@ -79,10 +72,10 @@ if (isset($_GET['delete'])) {
     }
 }
 
-$query = "SELECT * FROM produk";  // Pastikan menggunakan $db untuk koneksi
-$result = $db->query($query);  // Gunakan $db untuk melakukan query
+$query = "SELECT * FROM produk";
+$result = $db->query($query);
 if ($result) {
-    $produk = $result->fetch_all(MYSQLI_ASSOC);  // Ambil hasil query
+    $produk = $result->fetch_all(MYSQLI_ASSOC); 
 } else {
     echo "Error: " . $db->error;
 }
@@ -120,7 +113,6 @@ h2 {
     color: #333;
 }
 
-/* Form Styles */
 form {
     margin-bottom: 30px;
     padding: 10px;
@@ -157,7 +149,6 @@ form button:hover {
     background-color: #218838;
 }
 
-/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -186,14 +177,12 @@ tr:hover {
     background-color: #ddd;
 }
 
-/* Image Styling */
 td img {
     max-width: 100px;
     max-height: 100px;
     border-radius: 8px;
 }
 
-/* Links for Actions */
 tr td a {
     display: inline-block;
     margin: 5px;
@@ -208,7 +197,6 @@ tr td a:hover {
     background-color: #0056b3;
 }
 
-/* Message Display */
 p {
     padding: 10px;
     background-color: #d4edda;
@@ -220,20 +208,17 @@ p {
 </style>
     <div class="container">
         <h2>Daftar Produk</h2>
-
-        <!-- Form untuk menambahkan produk -->
         <form method="POST" enctype="multipart/form-data">
-    <h3>Tambah Produk</h3>
-    <input type="text" name="nama_product" placeholder="Nama Produk" required>
-    <input type="number" name="harga_product" placeholder="Harga Produk" required>
-    <input type="number" name="stok" placeholder="stok" required> 
-    <input type="file" name="gambar_product" accept="image/*" required>
-    <button type="submit" name="add_product">Tambah Produk</button>
-</form>
+            <h3>Tambah Produk</h3>
+            <input type="text" name="nama_product" placeholder="Nama Produk" required>
+            <input type="number" name="harga_product" placeholder="Harga Produk" required>
+            <input type="number" name="stok" placeholder="stok" required> 
+            <input type="file" name="gambar_product" accept="image/*" required>
+            <button type="submit" name="add_product">Tambah Produk</button>
+        </form>
 
         <?php if (isset($message)) { echo "<p>$message</p>"; } ?>
 
-        <!-- Tabel untuk menampilkan produk -->
         <table border="1">
             <thead>
                 <tr>

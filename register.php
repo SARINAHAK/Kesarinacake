@@ -1,5 +1,5 @@
 <?php
-include('koneksi.php'); // Pastikan koneksi database sudah benar
+include('koneksi.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -7,14 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
-    // Validasi apakah password dan konfirmasi password cocok
     if ($password !== $confirmPassword) {
         $error_message = "Password dan konfirmasi password tidak cocok!";
     } else {
-        // Encrypt password sebelum menyimpannya
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Cek apakah email sudah terdaftar
         $stmt = $db->prepare("SELECT * FROM login_register WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -23,11 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows > 0) {
             $error_message = "Email sudah terdaftar!";
         } else {
-            // Simpan data pengguna ke database
             $stmt = $db->prepare("INSERT INTO login_register (username, email, password) VALUES (?, ?, ?)");
             $stmt->bind_param('sss', $username, $email, $hashed_password);
             if ($stmt->execute()) {
-                header("Location: index.php");  // Redirect ke halaman login setelah berhasil registrasi
+                header("Location: index.php");
                 exit();
             } else {
                 $error_message = "Pendaftaran gagal!";

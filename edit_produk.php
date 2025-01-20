@@ -23,7 +23,6 @@ if (isset($_POST['edit_product'])) {
     $gambar_product = $_FILES['gambar_product']['name'];
     $gambar_product_tmp = $_FILES['gambar_product']['tmp_name'];
 
-    // Cek jika ada gambar yang diupload
     if (!empty($gambar_product)) {
         $gambar_product_folder = 'uploaded_img/' . $gambar_product;
         if (move_uploaded_file($gambar_product_tmp, $gambar_product_folder)) {
@@ -39,7 +38,7 @@ if (isset($_POST['edit_product'])) {
     $result = mysqli_query($db, $query);
 
     if ($result) {
-        header("Location: admin_produk.php"); // Redirect to product list page after successful update
+        header("Location: admin_produk.php"); 
     } else {
         echo "Gagal memperbarui produk: " . mysqli_error($db); 
     }

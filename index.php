@@ -6,7 +6,6 @@
     <title>Kesarina Cake - Aplikasi Web</title>
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -178,8 +177,6 @@
             </div>
         </nav>
     </header>
-
-    <!-- Hero Section -->
     <section class="hero" id="beranda">
         <div class="hero-overlay">
             <h1>Selamat Datang di Kesarina Cake</h1>

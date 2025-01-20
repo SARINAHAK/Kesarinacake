@@ -9,7 +9,6 @@ if (isset($_POST['add_produk'])) {
     $target_dir = "uploaded_img/";
     $target_file = $target_dir . basename($_FILES["gambar_product"]["name"]);
 
-    // Memindahkan file gambar ke folder uploads
     if (move_uploaded_file($_FILES["gambar_product"]["tmp_name"], $target_file)) {
         $query = "INSERT INTO produk (nama_product, harga_product, gambar_product, Stok) 
                   VALUES ('$nama', '$harga', '$gambar', '$stok')";
